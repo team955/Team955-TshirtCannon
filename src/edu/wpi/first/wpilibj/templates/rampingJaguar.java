@@ -9,16 +9,33 @@ import edu.wpi.first.wpilibj.*;
  *
  * @author ryan
  */
+
 public class rampingJaguar extends Jaguar {
     
-        public rampingJaguar (int slot, int channel) {
-            super(slot, channel);
- 
+    double current;
+    double max = .1;
+    double value; 
+        public rampingJaguar (int slot, int channel ) {
+            super(slot,channel);
+        }
+        
+        public void ramp(double target) {
+            current = get();
+            if (target > (current + max)) {
+                value  = current + max;
+            }
+            else if (target < (current - max)) {
+                value = current - max;
+            }
+            else {
+                value = target;
+            }
+            set(value);
         }
         
         //public double ramp (double set){
            // if ();
-            
+             
     // Put methods for controlling this subsystem
     // here. Call these from Commands.n
 
