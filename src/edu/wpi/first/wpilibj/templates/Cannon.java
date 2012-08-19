@@ -10,5 +10,8 @@ import edu.wpi.first.wpilibj.*;
  * @author ryan
  */
 public class Cannon {
-        
+    CSolenoids solTshirt;
+    CSolenoids solTshirt2;
+    CSolenoids solChargeShirt;
+    
 }
