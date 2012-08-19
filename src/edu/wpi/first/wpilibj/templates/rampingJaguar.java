@@ -33,6 +33,7 @@ public class rampingJaguar extends Jaguar {
             set(value);
         }
         
+
         //public double ramp (double set){
            // if ();
              
