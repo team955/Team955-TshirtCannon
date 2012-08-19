@@ -8,7 +8,7 @@
 package edu.wpi.first.wpilibj.templates;
 
 
-import edu.wpi.first.wpilibj.SimpleRobot;
+import edu.wpi.first.wpilibj.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -18,9 +18,9 @@ import edu.wpi.first.wpilibj.SimpleRobot;
  * directory.
  */
 public class RobotTemplate extends SimpleRobot {
-    /**
-     * This function is called once each time the robot enters autonomous mode.
-     */
+    Joystick joy = new Joystick(0); //TODO: fix int
+    Drive drive;
+    
     public void autonomous() {
         
     }
@@ -29,6 +29,6 @@ public class RobotTemplate extends SimpleRobot {
      * This function is called once each time the robot enters operator control.
      */
     public void operatorControl() {
-
+            drive.run(joy);
     }
 }

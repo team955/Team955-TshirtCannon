@@ -32,13 +32,4 @@ public class rampingJaguar extends Jaguar {
             }
             set(value);
         }
-        
-
-        //public double ramp (double set){
-           // if ();
-             
-    // Put methods for controlling this subsystem
-    // here. Call these from Commands.n
-
-  
 }
