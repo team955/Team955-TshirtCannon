@@ -10,13 +10,25 @@ import edu.wpi.first.wpilibj.*;
  * @author ryan
  */
 public class Cannon {
-    CSolenoids solTshirt;
-    CSolenoids solTshirt2;
-    CSolenoids solChargeShirt;
+    CSolenoids solTshirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
+    CSolenoids solTshirt2 = new CSolenoids(Var.chanSolUpTShirt2, Var.chanSolDownTShirt2);
+    CSolenoids solChargeShirt = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
+    boolean lastState = false;
+    boolean curState = false;
+    boolean shoot = false;
     
     public void run(Joystick joy)
     {
+        lastState = curState;
+        curState = joy.getRawButton(Var.buttonShootShirt);
         
+        if(lastState == false && curState == true)
+            shoot = !shoot;
+        
+        if(shoot)
+        {
+       
+        }
     }
     
 }
