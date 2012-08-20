@@ -14,4 +14,9 @@ public class Cannon {
     CSolenoids solTshirt2;
     CSolenoids solChargeShirt;
     
+    public void run(Joystick joy)
+    {
+        
+    }
+    
 }
