@@ -9,6 +9,11 @@ package edu.wpi.first.wpilibj.templates;
  * @author Fauzi
  */
 
+/*
+ * This is a LinkedList, for more information google it on thy internet.
+ * Had to make one because I need a list that could expand when I need it to,
+ * if you have any questions ask me (Fauzi)
+ */
 public class LinkedListDouble {
     
     private class link

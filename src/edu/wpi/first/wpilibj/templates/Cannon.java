@@ -9,6 +9,11 @@ import edu.wpi.first.wpilibj.*;
  *
  * @author ryan
  */
+
+/*
+ * This class is responsible for the "cannon" part of the t-shirt cannon.
+ * Currently we do not know how it will work so this is all we have at the moment
+ */
 public class Cannon {
     CSolenoids solTshirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
     CSolenoids solTshirt2 = new CSolenoids(Var.chanSolUpTShirt2, Var.chanSolDownTShirt2);

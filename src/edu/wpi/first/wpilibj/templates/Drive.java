@@ -10,6 +10,14 @@ import edu.wpi.first.wpilibj.*;
  *
  * @author ryan
  */
+
+/*
+ * This class is responsible for driving the t-shirt cannon
+ * it currently has a recording ability in the run function that
+ * has not been tested yet. It also has a setspeed function which
+ * sets the speed of the motors to the disired speed.
+ */
+         
 public class Drive {
     Timer timer;
     LinkedListDouble iTimerList = new LinkedListDouble();

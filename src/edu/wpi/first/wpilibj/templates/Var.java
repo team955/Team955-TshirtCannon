@@ -8,6 +8,14 @@ package edu.wpi.first.wpilibj.templates;
  *
  * @author Fauzi
  */
+
+/*
+ * This class has all the variables that are used the set the 
+ * channels, slots or speed parameters for any object in the t-shirt cannon.
+ * We have a seperate class just so we can change the channel more easily rather
+ * than seaching through the class itself. It currently has all variables set 
+ * to 0 because we do not know the channels at this moment
+ */
 public class Var {
     // TODO: Set all of these numbers to corresponding channels, slot, buttons etc...
     

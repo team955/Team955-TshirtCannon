@@ -10,6 +10,11 @@ import edu.wpi.first.wpilibj.*;
  * @author ryan
  */
 
+/*
+ * This class extends the Jaguar class. Its purpose is so that the motors
+ * would not just shoot off at the desired speed and damage the motor but 
+ * instead increase at a safe rate.
+ */
 public class rampingJaguar extends Jaguar {
     
     double current;

@@ -17,6 +17,11 @@ import edu.wpi.first.wpilibj.*;
  * creating this project, you must also update the manifest file in the resource
  * directory.
  */
+
+/*
+ * This is the main file where everything actually takes place.
+ * For more information ask Ryan, programming captian.
+ */
 public class RobotTemplate extends SimpleRobot {
     Joystick joy = new Joystick(0); //TODO: fix int
     Drive drive;
