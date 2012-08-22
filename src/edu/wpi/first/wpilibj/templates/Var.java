@@ -35,6 +35,7 @@ public class Var {
     static final int buttonRecord = 0;
     static final int buttonReplay = 0;
     static final int buttonShootShirt = 0;
+    static final int buttonReleaseAir = 0;
     
     // Other
     static final double jagurRampSpeed = 0;

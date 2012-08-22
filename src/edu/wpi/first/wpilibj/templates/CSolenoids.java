@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.*;
 public class CSolenoids 
 {
 
-    Solenoid solUp;
-    Solenoid solDown;
+    private Solenoid solUp;
+    private Solenoid solDown;
     
     public CSolenoids(int solUpChannel, int solDownChannel)
     {

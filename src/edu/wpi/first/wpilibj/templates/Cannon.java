@@ -18,22 +18,26 @@ public class Cannon {
     CSolenoids solTshirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
     CSolenoids solTshirt2 = new CSolenoids(Var.chanSolUpTShirt2, Var.chanSolDownTShirt2);
     CSolenoids solChargeShirt = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
-    boolean lastState = false;
-    boolean curState = false;
-    boolean shoot = false;
+    CButton bShootShirt = new CButton();
+    CButton bReleaseAir = new CButton();
     
     public void run(Joystick joy)
-    {
-        lastState = curState;
-        curState = joy.getRawButton(Var.buttonShootShirt);
+    {        
+        bShootShirt.run(joy, Var.buttonShootShirt);
+        bReleaseAir.run(joy, Var.buttonReleaseAir);
         
-        if(lastState == false && curState == true)
-            shoot = !shoot;
-        
-        if(shoot)
+        if(bShootShirt.get())
         {
-       
+            solChargeShirt.turnOn();
+            solTshirt2.turnOn();
+            solTshirt.turnOn();
+        }
+        
+        if(bReleaseAir.get())
+        {
+            solTshirt.turnOff();
+            solTshirt2.turnOff();
+            solChargeShirt.turnOff();
         }
     }
-    
 }

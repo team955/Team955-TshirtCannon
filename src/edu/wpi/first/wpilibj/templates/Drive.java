@@ -25,11 +25,8 @@ public class Drive {
     LinkedListDouble iYList = new LinkedListDouble();
     double iXBefore = 0;
     double iYBefore = 0;
-    boolean lastStateRC;
-    boolean curStateRC;
-    boolean lastStateRP;
-    boolean curStateRP;
-    boolean record = false;
+    CButton bRecord = new CButton();
+    CButton bReplay = new CButton();
     rampingJaguar motorRight = new rampingJaguar(Var.slotVicDriveRight,Var.chanVicDriveRight);
     rampingJaguar motorLeft = new rampingJaguar(Var.slotVicDriveLeft,Var.chanVicDriveLeft);
     
@@ -37,15 +34,10 @@ public class Drive {
     {
         double y = joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
-        lastStateRC = curStateRC;
-        curStateRC = joy.getRawButton(Var.buttonRecord);
-        lastStateRP = curStateRP;
-        curStateRC = joy.getRawButton(Var.buttonReplay);
-       
-        if(curStateRC == true && lastStateRC == false)
-            record = !record;
-       
-        if(record)
+        bRecord.run(joy, Var.buttonRecord);
+        bReplay.run(joy, Var.buttonReplay);
+
+        if(bRecord.get())
         {            
             if(joy.getX() != iXBefore && joy.getY() != iYBefore)
             {
@@ -60,7 +52,7 @@ public class Drive {
             }
         }
         
-        if(curStateRP == true && lastStateRP == false && record == false)
+        else if(bReplay.get())
         {
             for(int i = iXList.size(); i >= 0; --i)
             {
