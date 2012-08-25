@@ -33,4 +33,8 @@ public class CButton {
         return gotPressed;
     }
     
+    public void set(boolean bSetTo)
+    {
+        gotPressed = bSetTo;
+    }
 }

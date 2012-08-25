@@ -31,13 +31,11 @@ public class Cannon {
             solChargeShirt.turnOn();
             solTshirt2.turnOn();
             solTshirt.turnOn();
+            bShootShirt.set(false);
         }
         
-        if(bReleaseAir.get())
-        {
-            solTshirt.turnOff();
-            solTshirt2.turnOff();
-            solChargeShirt.turnOff();
-        }
+        solTshirt.turnOff();
+        solTshirt2.turnOff();
+        solChargeShirt.turnOff();
     }
 }
