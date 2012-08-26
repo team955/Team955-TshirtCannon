@@ -26,10 +26,10 @@ public class Var {
     static final int slotVicDriveLeft = 0;
     static final int chanSolUpTShirt = 0;
     static final int chanSolDownTShirt = 0;
-    static final int chanSolUpTShirt2 = 0;
-    static final int chanSolDownTShirt2 = 0;
     static final int chanSolUpChargeShirt = 0;
     static final int chanSolDownChargeShirt = 0;
+    static final int chanSolUpChargeShirt2 = 0;
+    static final int chanSolDownChargeShirt2 = 0;
     
     // Joysticks and buttons
     static final int buttonRecord = 0;

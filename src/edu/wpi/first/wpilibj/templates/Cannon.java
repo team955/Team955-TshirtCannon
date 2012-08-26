@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Cannon {
     CSolenoids solShootShirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
-    CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpTShirt2, Var.chanSolDownTShirt2);
-    CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
+    CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolUpChargeShirt);
+    CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt2, Var.chanSolDownChargeShirt2);
     CButton bShootShirt = new CButton();
     CButton bReleaseAir = new CButton();
     
