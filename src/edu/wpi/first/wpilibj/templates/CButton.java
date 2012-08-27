@@ -19,18 +19,27 @@ public class CButton {
     private boolean lastState = false;
     private boolean gotPressed = false;
     
-    public void run(Joystick joy, int button)
+    public void run( boolean button)
     {
         lastState = curState;
-        curState = joy.getRawButton(button);
+        curState = button;
         
         if(curState == true && lastState == false)
             gotPressed = !gotPressed;
     }
     
-    public boolean get()
+    public boolean gotPressed()
     {
         return gotPressed;
+    }
+    
+    public boolean isHeld()
+    {
+        if(curState == true && lastState == true)
+            return true;
+        
+        else
+            return false;
     }
     
     public void set(boolean bSetTo)

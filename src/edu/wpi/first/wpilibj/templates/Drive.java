@@ -34,10 +34,10 @@ public class Drive {
     {
         double y = joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
-        bRecord.run(joy, Var.buttonRecord);
-        bReplay.run(joy, Var.buttonReplay);
+        bRecord.run(joy.getRawButton(Var.buttonRecord));
+        bReplay.run(joy.getRawButton(Var.buttonReplay));
 
-        if(bRecord.get())
+        if(bRecord.gotPressed())
         {            
             if(joy.getX() != iXBefore && joy.getY() != iYBefore)
             {
@@ -52,7 +52,7 @@ public class Drive {
             }
         }
         
-        else if(bReplay.get())
+        else if(bReplay.gotPressed())
         {
             for(int i = iXList.size(); i >= 0; --i)
             {
@@ -89,6 +89,3 @@ public class Drive {
         motorLeft.set(motorLeftSpeed);
     }
 }
-
-
-//>>>>>>> cb72cd71caf8dc03dd787cbaf75e7ebf2782ab0b

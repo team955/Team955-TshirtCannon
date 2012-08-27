@@ -20,6 +20,8 @@ public class Var {
     // TODO: Set all of these numbers to corresponding channels, slot, buttons etc...
     
     // PWM
+    static final int chanVicShooter = 0;
+    static final int slotVicShooter = 0;
     static final int chanVicDriveRight = 0;
     static final int slotVicDriveRight = 0;
     static final int chanVicDriveLeft = 0;
@@ -36,6 +38,8 @@ public class Var {
     static final int buttonReplay = 0;
     static final int buttonShootShirt = 0;
     static final int buttonReleaseAir = 0;
+    static final int buttonAimUp = 0;
+    static final int buttonAimDown = 0;
     
     // Other
     static final double jagurRampSpeed = 0;
