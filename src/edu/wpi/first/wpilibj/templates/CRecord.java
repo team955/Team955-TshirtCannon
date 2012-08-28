@@ -74,13 +74,13 @@ public class CRecord {
                     if(cannon.btAimUp.gotPressed() != bAimUpBefore)
                     {
                         bAimUpBefore = !bAimUpBefore;
-                        dLsAiming.add(.1);
+                        dLsAiming.add(Var.turretSpeed);
                     }
 
                     else if(cannon.btAimDown.gotPressed() != bAimDownBefore)
                     {
                         bAimDownBefore = !bAimDownBefore;
-                        dLsAiming.add(-.1);
+                        dLsAiming.add(-Var.turretSpeed);
                     }
                 }
 
