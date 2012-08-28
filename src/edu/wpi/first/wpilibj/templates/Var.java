@@ -40,8 +40,11 @@ public class Var {
     static final int buttonReleaseAir = 0;
     static final int buttonAimUp = 0;
     static final int buttonAimDown = 0;
+    static final int buttonClearList = 0;
+    static final int buttonPauseRecord = 0;
     
     // Other
     static final double jagurRampSpeed = 0;
-    
+    static final int chanJoyDrive = 0;
+    static final double turretSpeed = 0;
 }

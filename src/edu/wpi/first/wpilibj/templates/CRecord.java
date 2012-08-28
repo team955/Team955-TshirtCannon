@@ -16,23 +16,125 @@ import edu.wpi.first.wpilibj.*;
  */
 public class CRecord {
     
-    Timer timer;
-    LinkedListDouble iTimerList = new LinkedListDouble();
-    LinkedListDouble iXList = new LinkedListDouble();
-    LinkedListDouble iYList = new LinkedListDouble();
+    Timer trRecord;
+    Timer trReplay;
+    LinkedListDouble dLsTimerDrive = new LinkedListDouble();
+    LinkedListDouble dLsTimerAiming = new LinkedListDouble();
+    LinkedListDouble dLsX = new LinkedListDouble();
+    LinkedListDouble dLsY = new LinkedListDouble();
+    LinkedListDouble dLsAiming = new LinkedListDouble();
+    boolean bAimUpBefore = false;
+    boolean bAimDownBefore = false;
+    boolean bRecord = false;
     double iXBefore = 0;
     double iYBefore = 0;
-    CButton bRecord = new CButton();
-    CButton bReplay = new CButton();
-    
+    CButton btRecord = new CButton();
+    CButton btReplay = new CButton();
+    CButton btClear = new CButton();
+    CButton btPause = new CButton();
+   
     public void run(Joystick joy, Cannon cannon, Drive driver)
     {
-        bRecord.run(joy.getRawButton(Var.buttonRecord));
-        bReplay.run(joy.getRawButton(Var.buttonReplay));
+        btRecord.run(joy.getRawButton(Var.buttonRecord));
+        btReplay.run(joy.getRawButton(Var.buttonReplay));
+        btClear.run(joy.getRawButton(Var.buttonClearList));
+        btPause.run(joy.getRawButton(Var.buttonPauseRecord));
         
-        if(bRecord.gotPressed())
+        if(btClear.gotPressed())
+                clearAll();
+        
+        if(btRecord.gotPressed())
         {
+            trRecord.start();
             
+            if(btPause.gotPressed())
+            {
+                trRecord.stop();
+                bRecord = !bRecord;
+                
+                if(bRecord)
+                    trRecord.start();
+            }
+            
+            if(bRecord)
+            {
+                if(joy.getX() != iXBefore && joy.getY() != iYBefore)
+                {
+                    iXBefore = joy.getX();
+                    iYBefore = joy.getY();
+                    dLsTimerDrive.add(trRecord.get());
+                    dLsX.add(joy.getX());
+                    dLsY.add(joy.getY());
+                }
+
+                if(cannon.btAimUp.gotPressed() != bAimUpBefore || cannon.btAimDown.gotPressed() != bAimDownBefore)
+                {
+                    dLsTimerAiming.add(trRecord.get());
+
+                    if(cannon.btAimUp.gotPressed() != bAimUpBefore)
+                    {
+                        bAimUpBefore = !bAimUpBefore;
+                        dLsAiming.add(.1);
+                    }
+
+                    else if(cannon.btAimDown.gotPressed() != bAimDownBefore)
+                    {
+                        bAimDownBefore = !bAimDownBefore;
+                        dLsAiming.add(-.1);
+                    }
+                }
+
+                else
+                {
+                    dLsTimerAiming.add(trRecord.get());
+                    dLsAiming.add(0);
+                }
+            }
         }
+        
+        else if(btReplay.gotPressed())
+        {
+            trRecord.stop();
+            double x, y;
+            int iDrivePos = 0;
+            int iAimPos = 0;
+         
+            trReplay.reset();
+            trReplay.start();
+            
+            while(trReplay.get() < trRecord.get())
+            {
+                if(trReplay.get() == dLsTimerDrive.get(iDrivePos))
+                {
+                    iDrivePos++;
+                    y = dLsY.get(iDrivePos) * Math.abs(dLsY.get(iDrivePos));
+                    x = -dLsX.get(iDrivePos) * Math.abs(dLsX.get(iDrivePos)); 
+                    driver.setSpeed(-(-y+x), -(y+x));
+                }
+                
+                if(trReplay.get() == dLsTimerAiming.get(iAimPos))
+                {
+                    iAimPos++;
+                    cannon.mShooter.set(dLsAiming.get(iAimPos));
+                }
+            }   
+        }
+    }
+    
+    private void clearAll()
+    {
+        trRecord.stop();
+        trRecord.reset();
+        trReplay.stop();
+        trReplay.reset();
+        dLsTimerDrive.deleteAll();
+        dLsTimerAiming.deleteAll();
+        dLsX.deleteAll();
+        dLsY.deleteAll();
+        dLsAiming.deleteAll();
+        bAimUpBefore = false;
+        bAimDownBefore = false;
+        iXBefore = 0;
+        iYBefore = 0;
     }
 }

@@ -22,9 +22,20 @@ import edu.wpi.first.wpilibj.*;
  * This is the main file where everything actually takes place.
  * For more information ask Ryan, programming captian.
  */
+
 public class RobotTemplate extends SimpleRobot {
     Joystick joy = new Joystick(0); //TODO: fix int
     Drive drive;
+    Cannon cannon;
+    CRecord record;
+    
+    /**
+    * This function is run when the robot is first started up and should be
+    * used for any initialization code.
+    */
+    public void robotInit() {
+        joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
+    }
     
     public void autonomous() {
         
@@ -35,5 +46,7 @@ public class RobotTemplate extends SimpleRobot {
      */
     public void operatorControl() {
             drive.run(joy);
+            cannon.run(joy);
+            record.run(joy, cannon, drive);
     }
 }

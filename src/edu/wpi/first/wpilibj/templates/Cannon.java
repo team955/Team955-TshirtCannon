@@ -18,40 +18,43 @@ public class Cannon {
     CSolenoids solShootShirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
     CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolUpChargeShirt);
     CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt2, Var.chanSolDownChargeShirt2);
-    CButton bShootShirt = new CButton();
-    CButton bReleaseAir = new CButton();
-    CButton bAimUp = new CButton();
-    CButton bAimDown = new CButton(); 
+    CButton btShootShirt = new CButton();
+    CButton btAimUp = new CButton();
+    CButton btAimDown = new CButton(); 
     Victor mShooter = new Victor(Var.chanVicShooter, Var.slotVicShooter);
     
     public void run(Joystick joy)
     {        
-        bShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
-        bReleaseAir.run(joy.getRawButton(Var.buttonReleaseAir));
-        bAimUp.run(joy.getRawButton(Var.buttonAimUp));
-        bAimDown.run(joy.getRawButton(Var.buttonAimDown));
+        btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
+        btAimUp.run(joy.getRawButton(Var.buttonAimUp));
+        btAimDown.run(joy.getRawButton(Var.buttonAimDown));
         
-        while( bAimUp.isHeld() || bAimDown.isHeld())
+        while( btAimUp.isHeld() || btAimDown.isHeld())
         {
-            if(bAimUp.isHeld())
-                mShooter.set(.1);
+            if(btAimUp.isHeld())
+                mShooter.set(Var.turretSpeed);
         
-            else if(bAimDown.isHeld())
-                mShooter.set(-.1);
+            else if(btAimDown.isHeld())
+                mShooter.set(-Var.turretSpeed);
         }
   
         mShooter.set(0);
         
-        if(bShootShirt.gotPressed())
+        if(btShootShirt.gotPressed())
         {
             solChargeTank.turnOn();
             solChargeTank2.turnOn();
             solShootShirt.turnOn();
-            bShootShirt.set(false);
+            btShootShirt.set(false);
         }
         
         solChargeTank.turnOff();
         solChargeTank2.turnOff();
         solShootShirt.turnOff();
+    }
+    
+    public void set(double speed)
+    {
+        mShooter.set(speed);
     }
 }
