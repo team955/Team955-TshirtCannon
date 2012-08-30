@@ -44,7 +44,7 @@ public class Var {
     static final int buttonPauseRecord = 0;
     
     // Other
-    static final double jagurRampSpeed = 0;
+    static final double jagurRampSpeed = 0.1;
     static final int chanJoyDrive = 0;
-    static final double turretSpeed = 0;
+    static final double turretSpeed = 0.1;
 }

@@ -15,12 +15,12 @@ import edu.wpi.first.wpilibj.*;
  * would not just shoot off at the desired speed and damage the motor but 
  * instead increase at a safe rate.
  */
-public class rampingJaguar extends Jaguar {
+public class RampingJaguar extends Jaguar {
     
     double current;
     double max = .1;
     double value; 
-        public rampingJaguar (int slot, int channel ) {
+        public RampingJaguar (int slot, int channel ) {
             super(slot,channel);
         }
         

@@ -45,8 +45,6 @@ public class CRecord {
         
         if(btRecord.gotPressed())
         {
-            trRecord.start();
-            
             if(btPause.gotPressed())
             {
                 trRecord.stop();
@@ -58,6 +56,8 @@ public class CRecord {
             
             if(bRecord)
             {
+                trRecord.start();
+                
                 if(joy.getX() != iXBefore && joy.getY() != iYBefore)
                 {
                     iXBefore = joy.getX();
@@ -67,18 +67,18 @@ public class CRecord {
                     dLsY.add(joy.getY());
                 }
 
-                if(cannon.btAimUp.gotPressed() != bAimUpBefore || cannon.btAimDown.gotPressed() != bAimDownBefore)
+                if(cannon.btAimUp.gotPressed() == true || cannon.btAimDown.gotPressed() == true)
                 {
-                    dLsTimerAiming.add(trRecord.get());
-
                     if(cannon.btAimUp.gotPressed() != bAimUpBefore)
                     {
+                        dLsTimerAiming.add(trRecord.get());
                         bAimUpBefore = !bAimUpBefore;
                         dLsAiming.add(Var.turretSpeed);
                     }
 
                     else if(cannon.btAimDown.gotPressed() != bAimDownBefore)
                     {
+                        dLsTimerAiming.add(trRecord.get());
                         bAimDownBefore = !bAimDownBefore;
                         dLsAiming.add(-Var.turretSpeed);
                     }
@@ -104,12 +104,15 @@ public class CRecord {
             
             while(trReplay.get() < trRecord.get())
             {
+                if(btReplay.gotPressed())
+                    break;
+                
                 if(trReplay.get() == dLsTimerDrive.get(iDrivePos))
                 {
                     iDrivePos++;
                     y = dLsY.get(iDrivePos) * Math.abs(dLsY.get(iDrivePos));
                     x = -dLsX.get(iDrivePos) * Math.abs(dLsX.get(iDrivePos)); 
-                    driver.setSpeed(-(-y+x), -(y+x));
+                    driver.setSpeed((-y+x), (y+x));
                 }
                 
                 if(trReplay.get() == dLsTimerAiming.get(iAimPos))
@@ -117,7 +120,9 @@ public class CRecord {
                     iAimPos++;
                     cannon.mShooter.set(dLsAiming.get(iAimPos));
                 }
-            }   
+            }
+      
+            trReplay.stop();
         }
     }
     

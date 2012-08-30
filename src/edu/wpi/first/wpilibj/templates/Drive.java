@@ -18,8 +18,8 @@ import edu.wpi.first.wpilibj.*;
  */
          
 public class Drive {
-    rampingJaguar motorRight = new rampingJaguar(Var.slotVicDriveRight,Var.chanVicDriveRight);
-    rampingJaguar motorLeft = new rampingJaguar(Var.slotVicDriveLeft,Var.chanVicDriveLeft);
+    RampingJaguar motorRight = new RampingJaguar(Var.slotVicDriveRight,Var.chanVicDriveRight);
+    RampingJaguar motorLeft = new RampingJaguar(Var.slotVicDriveLeft,Var.chanVicDriveLeft);
     
     public void run(Joystick joy)
     {
