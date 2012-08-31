@@ -91,7 +91,7 @@ public class CRecord {
                 }
             }
         }
-        
+            
         else if(btReplay.gotPressed())
         {
             trRecord.stop();
@@ -124,6 +124,9 @@ public class CRecord {
       
             trReplay.stop();
         }
+        
+        else if(!btRecord.gotPressed())
+            trRecord.stop();
     }
     
     private void clearAll()

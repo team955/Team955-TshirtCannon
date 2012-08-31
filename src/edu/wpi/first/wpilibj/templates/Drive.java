@@ -28,20 +28,20 @@ public class Drive {
         
         if( Math.abs(y) + Math.abs(x) > 0)
         {
-            motorRight.set(-y+x);
-            motorLeft.set(y+x);
+            motorRight.ramp(-y+x);
+            motorLeft.ramp(y+x);
         }
 
         else
         {
-            motorRight.set(0);
-            motorLeft.set(0);
+            motorRight.ramp(0);
+            motorLeft.ramp(0);
         }
     } 
     
     public void setSpeed(double motorRightSpeed, double motorLeftSpeed)
     {
-        motorRight.set(motorRightSpeed);
-        motorLeft.set(motorLeftSpeed);
+        motorRight.ramp(motorRightSpeed);
+        motorLeft.ramp(motorLeftSpeed);
     }
 }

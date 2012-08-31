@@ -34,14 +34,13 @@ public class Var {
     static final int chanSolDownChargeShirt2 = 0;
     
     // Joysticks and buttons
-    static final int buttonRecord = 0;
-    static final int buttonReplay = 0;
-    static final int buttonShootShirt = 0;
-    static final int buttonReleaseAir = 0;
-    static final int buttonAimUp = 0;
-    static final int buttonAimDown = 0;
-    static final int buttonClearList = 0;
-    static final int buttonPauseRecord = 0;
+    static final int buttonRecord = 1;
+    static final int buttonReplay = 3;
+    static final int buttonShootShirt = 8;
+    static final int buttonAimUp = 14;
+    static final int buttonAimDown = 16;
+    static final int buttonClearList = 4;
+    static final int buttonPauseRecord = 2;
     
     // Other
     static final double jagurRampSpeed = 0.1;

@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.*;
 public class RampingJaguar extends Jaguar {
     
     double current;
-    double max = .1;
+    double max = Var.jagurRampSpeed;
     double value; 
         public RampingJaguar (int slot, int channel ) {
             super(slot,channel);

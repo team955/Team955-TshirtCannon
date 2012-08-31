@@ -19,7 +19,7 @@ public class CButton {
     private boolean lastState = false;
     private boolean gotPressed = false;
     
-    public void run( boolean button)
+    public void run(boolean button)
     {
         lastState = curState;
         curState = button;
