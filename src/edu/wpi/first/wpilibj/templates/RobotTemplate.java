@@ -24,7 +24,7 @@ import edu.wpi.first.wpilibj.*;
  */
 
 public class RobotTemplate extends SimpleRobot {
-    Joystick joy = new Joystick(0); //TODO: fix int
+    Joystick ps3Joy = new Joystick(1); 
     Drive drive;
     Cannon cannon;
     CRecord record;
@@ -34,7 +34,7 @@ public class RobotTemplate extends SimpleRobot {
     * used for any initialization code.
     */
     public void robotInit() {
-        joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
+        ps3Joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
     }
     
     public void autonomous() {
@@ -45,8 +45,8 @@ public class RobotTemplate extends SimpleRobot {
      * This function is called once each time the robot enters operator control.
      */
     public void operatorControl() {
-            drive.run(joy);
-            cannon.run(joy);
-            record.run(joy, cannon, drive);
+            drive.run(ps3Joy);
+            cannon.run(ps3Joy);
+            record.run(ps3Joy, cannon, drive);
     }
 }

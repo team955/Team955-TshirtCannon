@@ -16,8 +16,8 @@ import edu.wpi.first.wpilibj.*;
  */
 public class Cannon {
     CSolenoids solShootShirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
-    CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolUpChargeShirt);
-    CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt2, Var.chanSolDownChargeShirt2);
+    //CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolUpChargeShirt);
+    //CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt2, Var.chanSolDownChargeShirt2);
     CButton btShootShirt = new CButton();
     CButton btAimUp = new CButton();
     CButton btAimDown = new CButton(); 
@@ -42,14 +42,14 @@ public class Cannon {
         
         if(btShootShirt.gotPressed())
         {
-            solChargeTank.turnOn();
-            solChargeTank2.turnOn();
+            //solChargeTank.turnOn();
+            //solChargeTank2.turnOn();
             solShootShirt.turnOn();
             btShootShirt.set(false);
         }
         
-        solChargeTank.turnOff();
-        solChargeTank2.turnOff();
+        //solChargeTank.turnOff();
+        //solChargeTank2.turnOff();
         solShootShirt.turnOff();
     }
     
