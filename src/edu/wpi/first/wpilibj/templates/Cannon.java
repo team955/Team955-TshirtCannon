@@ -22,6 +22,7 @@ public class Cannon {
     CButton btAimUp = new CButton();
     CButton btAimDown = new CButton(); 
     CSolenoids mShooter = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
+	Timer tSol;
     
     public void run(Joystick joy)
     {        
@@ -29,27 +30,33 @@ public class Cannon {
         btAimUp.run(joy.getRawButton(Var.buttonAimUp));
         btAimDown.run(joy.getRawButton(Var.buttonAimDown));
         
-        while( btAimUp.isHeld() || btAimDown.isHeld())
-        {
-            if(btAimUp.isHeld())
-                mShooter.turnOn();
         
-            else if(btAimDown.isHeld())
-                mShooter.turnOff();
-        }
-  
-        mShooter.turnOff();
+		if(btAimUp.isHeld())
+			mShooter.turnOn();
+
+		else if(btAimDown.isHeld())
+ 			mShooter.turnOff();
         
+		System.out.println("Sol up: " + mShooter.getUp() + " SolDown: " + mShooter.getDown());
         if(btShootShirt.gotPressed())
         {
             //solChargeTank.turnOn();
             //solChargeTank2.turnOn();
             solShootShirt.turnOn();
             btShootShirt.set(false);
+			tSol.start();
         }
         
         //solChargeTank.turnOff();
         //solChargeTank2.turnOff();
-        solShootShirt.turnOff();
+		
+		
+		
+		if(tSol.get() == 1)
+		{
+			solShootShirt.turnOff();
+			tSol.stop();
+			tSol.reset();
+		}
     }
 }

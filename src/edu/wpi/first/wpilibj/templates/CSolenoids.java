@@ -41,4 +41,13 @@ public class CSolenoids
         solDown.set(true); 
     }
     
+	public boolean getUp()
+	{
+		return solUp.get();
+	}
+	
+	public boolean getDown()
+	{
+		return solDown.get();
+	}
 }
