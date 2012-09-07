@@ -20,14 +20,10 @@ public class Var {
     // TODO: Set all of these numbers to corresponding channels, slot, buttons etc...
     
     // PWM
-    static final int chanVicShooter = 10;
-    static final int slotVicShooter = 2;
     static final int chanVicDriveRight = 9;
-    static final int slotVicDriveRight = 2;
     static final int chanVicDriveLeft = 8;
-    static final int slotVicDriveLeft = 2;
     static final int chanSolUpTShirt = 1;
-    static final int chanSolDownTShirt = 1;
+    static final int chanSolDownTShirt = 2;
     //static final int chanSolUpChargeShirt = 0;
     //static final int chanSolDownChargeShirt = 0;
     //static final int chanSolUpChargeShirt2 = 0;

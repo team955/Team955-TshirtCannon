@@ -20,8 +20,8 @@ public class RampingJaguar extends Jaguar {
     double current;
     double max = Var.jagurRampSpeed;
     double value; 
-        public RampingJaguar (int slot, int channel ) {
-            super(slot,channel);
+        public RampingJaguar (int channel ) {
+            super(channel);
         }
         
         public void ramp(double target) {

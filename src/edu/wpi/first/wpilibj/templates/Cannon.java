@@ -21,7 +21,7 @@ public class Cannon {
     CButton btShootShirt = new CButton();
     CButton btAimUp = new CButton();
     CButton btAimDown = new CButton(); 
-    Victor mShooter = new Victor(Var.chanVicShooter, Var.slotVicShooter);
+    CSolenoids mShooter = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
     
     public void run(Joystick joy)
     {        
@@ -32,13 +32,13 @@ public class Cannon {
         while( btAimUp.isHeld() || btAimDown.isHeld())
         {
             if(btAimUp.isHeld())
-                mShooter.set(Var.turretSpeed);
+                mShooter.turnOn();
         
             else if(btAimDown.isHeld())
-                mShooter.set(-Var.turretSpeed);
+                mShooter.turnOff();
         }
   
-        mShooter.set(0);
+        mShooter.turnOff();
         
         if(btShootShirt.gotPressed())
         {
@@ -51,10 +51,5 @@ public class Cannon {
         //solChargeTank.turnOff();
         //solChargeTank2.turnOff();
         solShootShirt.turnOff();
-    }
-    
-    public void set(double speed)
-    {
-        mShooter.set(speed);
     }
 }

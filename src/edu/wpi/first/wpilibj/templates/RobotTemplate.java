@@ -27,7 +27,7 @@ public class RobotTemplate extends SimpleRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive;
     Cannon cannon;
-    CRecord record;
+    //CRecord record;
     
     /**
     * This function is run when the robot is first started up and should be
@@ -47,6 +47,6 @@ public class RobotTemplate extends SimpleRobot {
     public void operatorControl() {
             drive.run(ps3Joy);
             cannon.run(ps3Joy);
-            record.run(ps3Joy, cannon, drive);
+            //record.run(ps3Joy, cannon, drive);
     }
 }
