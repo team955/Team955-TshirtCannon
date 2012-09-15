@@ -22,24 +22,25 @@ public class Var {
     // PWM
     static final int chanVicDriveRight = 9;
     static final int chanVicDriveLeft = 8;
-    static final int chanSolUpTShirt = 1;
-    static final int chanSolDownTShirt = 2;
-    //static final int chanSolUpChargeShirt = 0;
-    //static final int chanSolDownChargeShirt = 0;
-    //static final int chanSolUpChargeShirt2 = 0;
-   // static final int chanSolDownChargeShirt2 = 0;
+    static final int chanSolShootUpTShirt = 1;
+    static final int chanSolShootDownTShirt = 2;
+	static final int chanTurretMoveUpTShirt = 3;
+    static final int chanTurretMoveDownTShirt = 4;
+    static final int chanSolUpChargeShirt = 0;
+    static final int chanSolDownChargeShirt = 0;
     
     // Joysticks and buttons
     //static final int buttonRecord = 1;
     //static final int buttonReplay = 3;
-    static final int buttonShootShirt = 3;
-    static final int buttonAimUp = 4;
-    static final int buttonAimDown = 1;
+    static final int buttonShootShirt = 4;
+    static final int buttonAimUp = 1;
+    static final int buttonAimDown = 3;
+    static final int buttonChargeShirt = 8;
     //static final int buttonClearList = 4;
     //static final int buttonPauseRecord = 2;
     
     // Other
     static final double jagurRampSpeed = 0.1;
-    static final int chanJoyDrive = 2;
+    static final int chanJoyDrive = 3;
     static final double turretSpeed = 0.1;
 }

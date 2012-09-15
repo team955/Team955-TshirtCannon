@@ -25,8 +25,8 @@ public class Drive {
     {
         double y = joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
-        
-        if( Math.abs(y) + Math.abs(x) > 0.01)
+		
+        if(Math.abs(y) + Math.abs(x) > 0.1)
         {
             motorRight.ramp(-y+x);
             motorLeft.ramp(y+x);

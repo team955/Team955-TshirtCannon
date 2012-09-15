@@ -33,11 +33,11 @@ public class CSolenoids
     {
         solUp.set(true);
         solDown.set(false);
-    }
+	}
     
     public void turnOff()
     {
-        solUp.set(false);
+		solUp.set(false);
         solDown.set(true); 
     }
     

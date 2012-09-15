@@ -15,48 +15,55 @@ import edu.wpi.first.wpilibj.*;
  * It shoots shirt and raises or lowers the shirt shooter
  */
 public class Cannon {
-    CSolenoids solShootShirt = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
-    //CSolenoids solChargeTank = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolUpChargeShirt);
-    //CSolenoids solChargeTank2 = new CSolenoids(Var.chanSolUpChargeShirt2, Var.chanSolDownChargeShirt2);
+    CSolenoids solMoveTurret = new CSolenoids(Var.chanTurretMoveUpTShirt, Var.chanTurretMoveDownTShirt);
+    CSolenoids solShootShirt = new CSolenoids(Var.chanSolShootUpTShirt, Var.chanSolShootDownTShirt);
+    CSolenoids solFeedTurret = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
+    CButton btChargeTurret = new CButton();
     CButton btShootShirt = new CButton();
     CButton btAimUp = new CButton();
     CButton btAimDown = new CButton(); 
-    CSolenoids mShooter = new CSolenoids(Var.chanSolUpTShirt, Var.chanSolDownTShirt);
-	Timer tSol;
-    
+    Timer tSolTurretOff = new Timer();
+    Timer tSolChargeTurret = new Timer();
+	
     public void run(Joystick joy)
     {        
         btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
         btAimUp.run(joy.getRawButton(Var.buttonAimUp));
         btAimDown.run(joy.getRawButton(Var.buttonAimDown));
+        btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
         
         
-		if(btAimUp.isHeld())
-			mShooter.turnOn();
+        if(btAimUp.isHeld())
+            solMoveTurret.turnOn();
 
-		else if(btAimDown.isHeld())
- 			mShooter.turnOff();
+        else if(btAimDown.isHeld())
+            solMoveTurret.turnOff();
         
-		System.out.println("Sol up: " + mShooter.getUp() + " SolDown: " + mShooter.getDown());
-        if(btShootShirt.gotPressed())
+        if(btChargeTurret.gotPressed())
         {
-            //solChargeTank.turnOn();
-            //solChargeTank2.turnOn();
-            solShootShirt.turnOn();
-            btShootShirt.set(false);
-			tSol.start();
+            solFeedTurret.turnOn();
+            tSolChargeTurret.start();
         }
         
-        //solChargeTank.turnOff();
-        //solChargeTank2.turnOff();
+        if(tSolChargeTurret.get() > .5)
+        {
+            solFeedTurret.turnOff();
+            tSolChargeTurret.stop();
+            tSolChargeTurret.reset();
+        }
+	
+        if(btShootShirt.gotPressed())
+        {
+            solShootShirt.turnOn();
+            btShootShirt.set(false);
+            tSolTurretOff.start();
+        }
 		
-		
-		
-		if(tSol.get() == 1)
-		{
-			solShootShirt.turnOff();
-			tSol.stop();
-			tSol.reset();
-		}
+        if(tSolTurretOff.get() > 1)
+        {
+            solShootShirt.turnOff();
+            tSolTurretOff.stop();
+            tSolTurretOff.reset();
+        }
     }
 }

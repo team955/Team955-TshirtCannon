@@ -23,10 +23,10 @@ import edu.wpi.first.wpilibj.*;
  * For more information ask Ryan, programming captian.
  */
 
-public class RobotTemplate extends SimpleRobot {
+public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
-    Drive drive;
-    Cannon cannon;
+    Drive drive = new Drive();
+    Cannon cannon = new Cannon();
     //CRecord record;
     
     /**
@@ -42,9 +42,9 @@ public class RobotTemplate extends SimpleRobot {
     }
 
     /**
-     * This function is called once each time the robot enters operator control.
+     * This function is called once each time the robot enters operator control. False
      */
-    public void operatorControl() {
+    public void teleopPeriodic() {
             drive.run(ps3Joy);
             cannon.run(ps3Joy);
             //record.run(ps3Joy, cannon, drive);
