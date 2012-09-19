@@ -24,7 +24,7 @@ public class RampingJaguar extends Jaguar {
             super(channel);
         }
         
-        public void ramp(double target) {
+        public void set(double target) {
             current = get();
             if (target > (current + max)) {
                 value  = current + max;

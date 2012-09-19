@@ -18,30 +18,33 @@ import edu.wpi.first.wpilibj.*;
  */
          
 public class Drive {
-    RampingJaguar motorRight = new RampingJaguar(Var.chanVicDriveRight);
-    RampingJaguar motorLeft = new RampingJaguar(Var.chanVicDriveLeft);
-    
+    Victor motorRight = new Victor(Var.chanVicDriveRight);
+    Victor motorLeft = new Victor(Var.chanVicDriveLeft);
+    CButton butInvert = new CButton();
     public void run(Joystick joy)
     {
-        double y = joy.getY() * Math.abs(joy.getY());
+		butInvert.run(joy.getRawButton(Var.buttonInvert));
+		
+        double y = -joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
 		
+		System.out.println("x:" + x + " - y:" + y);
         if(Math.abs(y) + Math.abs(x) > 0.1)
         {
-            motorRight.ramp(-y+x);
-            motorLeft.ramp(y+x);
+            motorRight.set(-y+x);
+            motorLeft.set(y+x);
         }
 
         else
         {
-            motorRight.ramp(0);
-            motorLeft.ramp(0);
+            motorRight.set(0);
+            motorLeft.set(0);
         }
     } 
     
     public void setSpeed(double motorRightSpeed, double motorLeftSpeed)
     {
-        motorRight.ramp(motorRightSpeed);
-        motorLeft.ramp(motorLeftSpeed);
+        motorRight.set(motorRightSpeed);
+        motorLeft.set(motorLeftSpeed);
     }
 }

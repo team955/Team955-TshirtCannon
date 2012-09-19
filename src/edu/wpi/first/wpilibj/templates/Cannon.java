@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.*;
  * This class is responsible for the "cannon" part of the t-shirt cannon.
  * It shoots shirt and raises or lowers the shirt shooter
  */
+
 public class Cannon {
     CSolenoids solMoveTurret = new CSolenoids(Var.chanTurretMoveUpTShirt, Var.chanTurretMoveDownTShirt);
     CSolenoids solShootShirt = new CSolenoids(Var.chanSolShootUpTShirt, Var.chanSolShootDownTShirt);
@@ -24,6 +25,7 @@ public class Cannon {
     CButton btAimDown = new CButton(); 
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
+    boolean isCharging = false;
 	
     public void run(Joystick joy)
     {        
@@ -33,29 +35,30 @@ public class Cannon {
         btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
         
         
-        if(btAimUp.isHeld())
+        if(btAimUp.gotPressed())
             solMoveTurret.turnOn();
 
-        else if(btAimDown.isHeld())
+        else if(btAimDown.gotPressed())
             solMoveTurret.turnOff();
         
         if(btChargeTurret.gotPressed())
         {
+            isCharging = true;
             solFeedTurret.turnOn();
             tSolChargeTurret.start();
         }
         
         if(tSolChargeTurret.get() > .5)
         {
+            isCharging = false;
             solFeedTurret.turnOff();
             tSolChargeTurret.stop();
             tSolChargeTurret.reset();
         }
 	
-        if(btShootShirt.gotPressed())
+        if(btShootShirt.gotPressed() && isCharging == false)
         {
             solShootShirt.turnOn();
-            btShootShirt.set(false);
             tSolTurretOff.start();
         }
 		
@@ -65,5 +68,56 @@ public class Cannon {
             tSolTurretOff.stop();
             tSolTurretOff.reset();
         }
+		
+        System.out.println("solFeedTurret Up:" + solFeedTurret.getUp() + " - Down:" + solFeedTurret.getDown());
+        System.out.println("solMoveTurret Up:" + solMoveTurret.getUp() + " - Down:" + solMoveTurret.getDown());
+        System.out.println("solShootShirt Up:" + solShootShirt.getUp() + " - Down:" + solShootShirt.getDown());
     }
 }
+
+//public void run(Joystick joy)
+//    {        
+//        btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
+//        btAimUp.run(joy.getRawButton(Var.buttonAimUp));
+//        btAimDown.run(joy.getRawButton(Var.buttonAimDown));
+//        btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
+//        
+//        
+//        if(btAimUp.isHeld())
+//            solMoveTurret.turnOn();
+//
+//        else if(btAimDown.isHeld())
+//            solMoveTurret.turnOff();
+//        
+//        if(btChargeTurret.gotPressed())
+//        {
+//			isCharging = true;
+//            solFeedTurret.turnOn();
+//            tSolChargeTurret.start();
+//        }
+//        
+//        if(tSolChargeTurret.get() > .5)
+//        {
+//			isCharging = false;
+//            solFeedTurret.turnOff();
+//            tSolChargeTurret.stop();
+//            tSolChargeTurret.reset();
+//        }
+//	
+//        if(btShootShirt.gotPressed() && isCharging == false)
+//        {
+//            solShootShirt.turnOn();
+//            tSolTurretOff.start();
+//        }
+//		
+//        if(tSolTurretOff.get() > 1)
+//        {
+//            solShootShirt.turnOff();
+//            tSolTurretOff.stop();
+//            tSolTurretOff.reset();
+//        }
+//		
+//		System.out.println("solFeedTurret Up:" + solFeedTurret.getUp() + " - Down:" + solFeedTurret.getDown());
+//		System.out.println("solMoveTurret Up:" + solMoveTurret.getUp() + " - Down:" + solMoveTurret.getDown());
+//		System.out.println("solShootShirt Up:" + solShootShirt.getUp() + " - Down:" + solShootShirt.getDown());
+//    }

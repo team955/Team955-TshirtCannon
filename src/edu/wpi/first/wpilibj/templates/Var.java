@@ -20,24 +20,29 @@ public class Var {
     // TODO: Set all of these numbers to corresponding channels, slot, buttons etc...
     
     // PWM
-    static final int chanVicDriveRight = 9;
-    static final int chanVicDriveLeft = 8;
+    static final int chanVicDriveRight = 1;
+    static final int chanVicDriveLeft = 2;
+	
+    // Solenoids
     static final int chanSolShootUpTShirt = 1;
     static final int chanSolShootDownTShirt = 2;
-	static final int chanTurretMoveUpTShirt = 3;
+    static final int chanTurretMoveUpTShirt = 3;
     static final int chanTurretMoveDownTShirt = 4;
-    static final int chanSolUpChargeShirt = 0;
-    static final int chanSolDownChargeShirt = 0;
+    static final int chanSolUpChargeShirt = 5;
+    static final int chanSolDownChargeShirt = 6;
     
     // Joysticks and buttons
-    //static final int buttonRecord = 1;
-    //static final int buttonReplay = 3;
+    
     static final int buttonShootShirt = 4;
     static final int buttonAimUp = 1;
     static final int buttonAimDown = 3;
     static final int buttonChargeShirt = 8;
-    //static final int buttonClearList = 4;
-    //static final int buttonPauseRecord = 2;
+    static final int buttonInvert = 12;
+    
+    static final int buttonRecord = 5;
+    static final int buttonReplay = 6;
+    static final int buttonClearList = 7;
+    static final int buttonPauseRecord = 11;
     
     // Other
     static final double jagurRampSpeed = 0.1;

@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj.*;
  * For more information ask Ryan, programming captian.
  */
 
+// SOLENOID BUMPER CHANNEL 7 OR 8 DOES NOT WORK!!!!!!
+
 public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive = new Drive();

@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.*;
 public class CButton {
     private boolean curState = false;
     private boolean lastState = false;
-    private boolean gotPressed = false;
+    private boolean Bswitch = false;
     
     public void run(boolean button)
     {
@@ -25,12 +25,17 @@ public class CButton {
         curState = button;
         
         if(curState == true && lastState == false)
-            gotPressed = !gotPressed;
+            Bswitch = !Bswitch;
     }
     
     public boolean gotPressed()
     {
-        return gotPressed;
+        return curState == true && lastState == false;
+    }
+    
+    public boolean getSwitch()
+    {
+        return Bswitch;
     }
     
     public boolean isHeld()
@@ -44,6 +49,6 @@ public class CButton {
     
     public void set(boolean bSetTo)
     {
-        gotPressed = bSetTo;
+        Bswitch = bSetTo;
     }
 }
