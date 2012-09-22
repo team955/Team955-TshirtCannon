@@ -30,8 +30,8 @@ public class LinkedListBoolean {
     
     LinkedListBoolean()
     {
-		head = null;
-		curLink = null;
+        head = null;
+        curLink = null;
         last = null;
         size  = 0;
     }
@@ -61,7 +61,7 @@ public class LinkedListBoolean {
     {
         boolean retValue = curLink.dVal;
         
-        if(bNext)
+        if(bNext && curLink.next != null)
             curLink = curLink.next;
         
         return retValue;
@@ -108,18 +108,18 @@ public class LinkedListBoolean {
         size--;
         link tempLink = getObject(index);
         
-        if(tempLink.next != null)
-            tempLink.next.prev = tempLink.next;
-        
-        if(tempLink.prev != null)
-            tempLink.prev.next = tempLink.prev;
-        
         if(index == size)
             last = tempLink.prev;
         
         if(index == 0)
             head = tempLink.next;
         
+        if(tempLink.next != null)
+            tempLink.next.prev = tempLink.prev;
+        
+        if(tempLink.prev != null)
+            tempLink.prev.next = tempLink.next;
+       
         tempLink.next = null;
         tempLink.prev = null;
     }

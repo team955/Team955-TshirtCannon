@@ -61,7 +61,7 @@ public class LinkedListDouble {
     {
         double retValue = curLink.dVal;
         
-        if(bNext)
+        if(bNext && curLink.next != null)
             curLink = curLink.next;
         
         return retValue;
@@ -108,17 +108,17 @@ public class LinkedListDouble {
         size--;
         link tempLink = getObject(index);
         
-        if(tempLink.next != null)
-            tempLink.next.prev = tempLink.next;
-        
-        if(tempLink.prev != null)
-            tempLink.prev.next = tempLink.prev;
-        
         if(index == size)
             last = tempLink.prev;
         
         if(index == 0)
             head = tempLink.next;
+        
+        if(tempLink.next != null)
+            tempLink.next.prev = tempLink.prev;
+        
+        if(tempLink.prev != null)
+            tempLink.prev.next = tempLink.next;
         
         tempLink.next = null;
         tempLink.prev = null;
@@ -141,6 +141,7 @@ public class LinkedListDouble {
         
         head = null;
         last = null;
+        curLink = null;
         size = 0;
     }
     
