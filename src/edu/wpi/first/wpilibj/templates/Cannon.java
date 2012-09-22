@@ -26,8 +26,9 @@ public class Cannon {
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
     boolean isCharging = false;
+    boolean bShooting = false;
 	
-    public void run(Joystick joy)
+    public void run(Joystick joy, Drive driver)
     {        
         btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
         btAimUp.run(joy.getRawButton(Var.buttonAimUp));
@@ -41,14 +42,14 @@ public class Cannon {
         else if(btAimDown.gotPressed())
             solMoveTurret.turnOff();
         
-        if(btChargeTurret.gotPressed())
+        if(btChargeTurret.gotPressed() && bShooting == false)
         {
             isCharging = true;
             solFeedTurret.turnOn();
             tSolChargeTurret.start();
         }
         
-        if(tSolChargeTurret.get() > .5)
+        if(tSolChargeTurret.get() > Var.solChargeTime)
         {
             isCharging = false;
             solFeedTurret.turnOff();
@@ -58,20 +59,20 @@ public class Cannon {
 	
         if(btShootShirt.gotPressed() && isCharging == false)
         {
+            driver.setSpeed(Var.kickBackSpeed, Var.kickBackSpeed);
+            bShooting = true;
             solShootShirt.turnOn();
             tSolTurretOff.start();
         }
 		
         if(tSolTurretOff.get() > 1)
         {
+            driver.setSpeed(0, 0);
+            bShooting = false;
             solShootShirt.turnOff();
             tSolTurretOff.stop();
             tSolTurretOff.reset();
         }
-		
-        System.out.println("solFeedTurret Up:" + solFeedTurret.getUp() + " - Down:" + solFeedTurret.getDown());
-        System.out.println("solMoveTurret Up:" + solMoveTurret.getUp() + " - Down:" + solMoveTurret.getDown());
-        System.out.println("solShootShirt Up:" + solShootShirt.getUp() + " - Down:" + solShootShirt.getDown());
     }
 }
 

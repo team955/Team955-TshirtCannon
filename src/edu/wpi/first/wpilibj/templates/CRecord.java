@@ -4,20 +4,20 @@
  */
 
 /*
- * This class will hopefully be responsible fore recording the robots 
+ * This class will hopefully be responsible for recording the robots 
  * movements and "replaying" them.
  */
 package edu.wpi.first.wpilibj.templates;
 import edu.wpi.first.wpilibj.*;
-
+//test
 /**
  *
  * @author Fauzi
  */
 public class CRecord {
-    
-    Timer trRecord;
-    Timer trReplay;
+
+    Timer trRecord = new Timer();
+    Timer trReplay = new Timer();
     LinkedListDouble dLsTimerDrive = new LinkedListDouble();
     LinkedListDouble dLsTimerAiming = new LinkedListDouble();
     LinkedListDouble dLsX = new LinkedListDouble();
@@ -31,102 +31,74 @@ public class CRecord {
     CButton btRecord = new CButton();
     CButton btReplay = new CButton();
     CButton btClear = new CButton();
-    CButton btPause = new CButton();
    
     public void run(Joystick joy, Cannon cannon, Drive driver)
     {
         btRecord.run(joy.getRawButton(Var.buttonRecord));
         btReplay.run(joy.getRawButton(Var.buttonReplay));
         btClear.run(joy.getRawButton(Var.buttonClearList));
-        btPause.run(joy.getRawButton(Var.buttonPauseRecord));
         
         if(btClear.gotPressed())
                 clearAll();
         
         if(btRecord.getSwitch())
-        {
-            if(btPause.gotPressed())
+        {   
+            System.out.println("Record");
+            trRecord.start();
+
+            if(joy.getX() != iXBefore && joy.getY() != iYBefore)
             {
-                trRecord.stop();
-                bRecord = !bRecord;
+                iXBefore = joy.getX();
+                iYBefore = joy.getY();
+                dLsTimerDrive.add(trRecord.get());
+                dLsX.add(joy.getX());
+                dLsY.add(joy.getY());
             }
-            
-            if(bRecord)
+
+            if(cannon.btAimUp.gotPressed() != bAimUpBefore)
             {
-                trRecord.start();
-                
-                if(joy.getX() != iXBefore && joy.getY() != iYBefore)
-                {
-                    iXBefore = joy.getX();
-                    iYBefore = joy.getY();
-                    dLsTimerDrive.add(trRecord.get());
-                    dLsX.add(joy.getX());
-                    dLsY.add(joy.getY());
-                }
-
-                if(cannon.btAimUp.gotPressed() == true || cannon.btAimDown.gotPressed() == true)
-                {
-                    if(cannon.btAimUp.gotPressed() != bAimUpBefore)
-                    {
-                        dLsTimerAiming.add(trRecord.get());
-                        bAimUpBefore = !bAimUpBefore;
-                        dLsAiming.add(true);
-                    }
-
-                    else if(cannon.btAimDown.gotPressed() != bAimDownBefore)
-                    {
-                        dLsTimerAiming.add(trRecord.get());
-                        bAimDownBefore = !bAimDownBefore;
-                        dLsAiming.add(true);
-                    }
-                }
-
-                else
-                {
                     dLsTimerAiming.add(trRecord.get());
-                    dLsAiming.add(false);
-                }
+                    bAimUpBefore = !bAimUpBefore;
+                    dLsAiming.add(bAimUpBefore);
             }
         }
-            
+		
         else if(btReplay.getSwitch())
         {
-            trRecord.stop();
+            System.out.println("Replaying");
             double x, y;
-            int iDrivePos = 0;
-            int iAimPos = 0;
-         
-            trReplay.reset();
+            
+            trRecord.stop();
             trReplay.start();
             
             if(trReplay.get() < trRecord.get())
             {
-                if(btReplay.gotPressed())
-                    btReplay.set(false);
-                
-                if(trReplay.get() == dLsTimerDrive.get(iDrivePos))
+                System.out.println("Working");
+                if(trReplay.get() >= dLsTimerDrive.getNext(false))
                 {
-                    iDrivePos++;
-                    y = dLsY.get(iDrivePos) * Math.abs(dLsY.get(iDrivePos));
-                    x = -dLsX.get(iDrivePos) * Math.abs(dLsX.get(iDrivePos)); 
+                    dLsTimerDrive.getNext(true);
+                    y = dLsY.getNext(true) * Math.abs(dLsY.getNext(true));
+                    x = -dLsX.getNext(true) * Math.abs(dLsX.getNext(true)); 
                     driver.setSpeed((-y+x), (y+x));
                 }
-                
-                if(trReplay.get() == dLsTimerAiming.get(iAimPos))
+
+                if(trReplay.get() >= dLsTimerAiming.getNext(false))
                 {
-                    iAimPos++;
-                    cannon.solMoveTurret.set(dLsAiming.get(iAimPos));
+                    dLsTimerAiming.getNext(true);
+                    cannon.solMoveTurret.set(dLsAiming.getNext(true));
                 }
             }
-      
-            trReplay.stop();
+			
+            else
+            {
+                    driver.setSpeed(0,0);
+                    trReplay.stop();
+                    trReplay.reset();
+            }
         }
-        
-        else if(!btRecord.gotPressed())
-            trRecord.stop();
     }
     
-    private void clearAll()
+    private void clearAll() // To clear the memory so you can record something else
     {
         trRecord.stop();
         trRecord.reset();
@@ -139,6 +111,7 @@ public class CRecord {
         dLsAiming.deleteAll();
         bAimUpBefore = false;
         bAimDownBefore = false;
+        bRecord = false;
         iXBefore = 0;
         iYBefore = 0;
     }

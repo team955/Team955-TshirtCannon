@@ -25,11 +25,13 @@ public class LinkedListBoolean {
     
     private link head;
     private link last;
+    private link curLink;
     private int size;
     
     LinkedListBoolean()
     {
-        head = null;
+		head = null;
+		curLink = null;
         last = null;
         size  = 0;
     }
@@ -43,6 +45,7 @@ public class LinkedListBoolean {
         if(head == null)
         {
             head = tempLink;
+            curLink = head;
             last = head;
         }
         
@@ -53,27 +56,27 @@ public class LinkedListBoolean {
             last = tempLink;
         }
     }
+
+    public boolean getNext(boolean bNext)
+    {
+        boolean retValue = curLink.dVal;
+        
+        if(bNext)
+            curLink = curLink.next;
+        
+        return retValue;
+    }
+        
+    public void reset()
+    {
+        curLink = head;
+    }
     
     public boolean get(int index)
     {
         link tempLink;
-     
-        if(index <= (size/2))
-        {
-            tempLink = head;
-            
-            for(int i = 0; i < index; ++i)
-                tempLink = tempLink.next;
-        }
         
-        else
-        {
-            tempLink = last;
-            
-            for(int i = 1; i < (size-index); ++i)
-                tempLink = tempLink.prev;    
-        }
-        
+        tempLink = getObject(index);
         return tempLink.dVal;
     }
     
@@ -125,7 +128,7 @@ public class LinkedListBoolean {
     {
         link tempLink = getObject(index);
         tempLink.dVal = dReplaceWith;
-    } 
+    }
     
     public void deleteAll()
     {

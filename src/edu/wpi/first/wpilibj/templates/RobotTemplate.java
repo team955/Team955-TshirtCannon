@@ -29,7 +29,7 @@ public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive = new Drive();
     Cannon cannon = new Cannon();
-    //CRecord record;
+	CRecord record = new CRecord();
     
     /**
     * This function is run when the robot is first started up and should be
@@ -48,7 +48,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void teleopPeriodic() {
             drive.run(ps3Joy);
-            cannon.run(ps3Joy);
-            //record.run(ps3Joy, cannon, drive);
+            cannon.run(ps3Joy, drive);
+            record.run(ps3Joy, cannon, drive);
     }
 }

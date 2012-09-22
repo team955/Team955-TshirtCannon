@@ -25,11 +25,13 @@ public class LinkedListDouble {
     
     private link head;
     private link last;
+    private link curLink;
     private int size;
     
     LinkedListDouble()
     {
         head = null;
+        curLink = null;
         last = null;
         size  = 0;
     }
@@ -43,6 +45,7 @@ public class LinkedListDouble {
         if(head == null)
         {
             head = tempLink;
+            curLink = head;
             last = head;
         }
         
@@ -54,26 +57,26 @@ public class LinkedListDouble {
         }
     }
     
+    public double getNext(boolean bNext)
+    {
+        double retValue = curLink.dVal;
+        
+        if(bNext)
+            curLink = curLink.next;
+        
+        return retValue;
+    }
+        
+    public void reset()
+    {
+        curLink = head;
+    }
+    
     public double get(int index)
     {
         link tempLink;
-     
-        if(index <= (size/2))
-        {
-            tempLink = head;
-            
-            for(int i = 0; i < index; ++i)
-                tempLink = tempLink.next;
-        }
         
-        else
-        {
-            tempLink = last;
-            
-            for(int i = 1; i < (size-index); ++i)
-                tempLink = tempLink.prev;    
-        }
-        
+        tempLink = getObject(index);
         return tempLink.dVal;
     }
     
