@@ -29,17 +29,21 @@ public class Drive {
         double x = -joy.getX() * Math.abs(joy.getX());
 		
 		System.out.println("x:" + x + " - y:" + y);
-        if(Math.abs(y) + Math.abs(x) > 0.1)
-        {
-            motorRight.set(-y+x);
-            motorLeft.set(y+x);
-        }
+		
+		if(Var.bShooting != true)
+		{
+			if(Math.abs(y) + Math.abs(x) > 0.1)
+			{
+				motorRight.set(-y+x);
+				motorLeft.set(y+x);
+			}
 
-        else
-        {
-            motorRight.set(0);
-            motorLeft.set(0);
-        }
+			else
+			{
+				motorRight.set(0);
+				motorLeft.set(0);
+			}
+		}
     } 
     
     public void setSpeed(double motorRightSpeed, double motorLeftSpeed)

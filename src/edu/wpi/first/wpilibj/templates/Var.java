@@ -42,7 +42,8 @@ public class Var {
     static final int buttonClearList = 7;
     
     // Other
-    static final double kickBackSpeed = .25;
+	static boolean bShooting = false;
+    static final double kickBackSpeed = 1;
     static final double solChargeTime = 3;
     static final double jagurRampSpeed = 0.1;
     static final int chanJoyDrive = 3;

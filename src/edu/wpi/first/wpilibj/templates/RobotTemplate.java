@@ -18,18 +18,17 @@ import edu.wpi.first.wpilibj.*;
  * directory.
  */
 
-/*
- * This is the main file where everything actually takes place.
+/*where everything actually takes place.
  * For more information ask Ryan, programming captian.
  */
 
 // SOLENOID BUMPER CHANNEL 7 OR 8 DOES NOT WORK!!!!!!
-
+// Max time to charge befpre valves pop off : 3.85 * 4
 public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive = new Drive();
     Cannon cannon = new Cannon();
-	CRecord record = new CRecord();
+	//CRecord record = new CRecord();
     
     /**
     * This function is run when the robot is first started up and should be
@@ -47,8 +46,8 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called once each time the robot enters operator control. False
      */
     public void teleopPeriodic() {
-            drive.run(ps3Joy);
-            cannon.run(ps3Joy, drive);
-            record.run(ps3Joy, cannon, drive);
+		drive.run(ps3Joy);
+		cannon.run(ps3Joy, drive);
+		//record.run(ps3Joy, cannon, drive);
     }
 }
