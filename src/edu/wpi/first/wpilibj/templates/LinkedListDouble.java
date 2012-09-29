@@ -96,7 +96,7 @@ public class LinkedListDouble {
         {
             tempLink = last;
             
-            for(int i = 1; i < (size-index); ++i)
+            for(int i = 0; i < (size-index); ++i)
                 tempLink = tempLink.prev;    
         } 
         

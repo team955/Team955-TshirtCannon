@@ -24,8 +24,6 @@ public class CRecord {
     LinkedListDouble dLsY = new LinkedListDouble();
     LinkedListBoolean dLsAiming = new LinkedListBoolean();
     boolean bAimUpBefore = false;
-    boolean bAimDownBefore = false;
-    boolean bRecord = false;
     double iXBefore = 0;
     double iYBefore = 0;
     CButton btRecord = new CButton();
@@ -46,7 +44,7 @@ public class CRecord {
             System.out.println("Record");
             trRecord.start();
 
-            if(joy.getX() != iXBefore && joy.getY() != iYBefore)
+            if(joy.getX() != iXBefore || joy.getY() != iYBefore)
             {
                 iXBefore = joy.getX();
                 iYBefore = joy.getY();
@@ -69,16 +67,17 @@ public class CRecord {
             double x, y;
             
             trRecord.stop();
+            trReplay.stop();
+            trReplay.reset();
             trReplay.start();
             
             if(trReplay.get() < trRecord.get())
             {
-                System.out.println("Working");
                 if(trReplay.get() >= dLsTimerDrive.getNext(false))
                 {
                     dLsTimerDrive.getNext(true);
-                    y = dLsY.getNext(true) * Math.abs(dLsY.getNext(true));
-                    x = -dLsX.getNext(true) * Math.abs(dLsX.getNext(true)); 
+                    y = -dLsY.getNext(false) * Math.abs(dLsY.getNext(true));
+                    x = -dLsX.getNext(false) * Math.abs(dLsX.getNext(true)); 
                     driver.setSpeed((-y+x), (y+x));
                 }
 
@@ -91,9 +90,9 @@ public class CRecord {
 			
             else
             {
-                    driver.setSpeed(0,0);
-                    trReplay.stop();
-                    trReplay.reset();
+                driver.setSpeed(0,0);
+                trReplay.stop();
+                trReplay.reset();
             }
         }
     }
@@ -110,8 +109,6 @@ public class CRecord {
         dLsY.deleteAll();
         dLsAiming.deleteAll();
         bAimUpBefore = false;
-        bAimDownBefore = false;
-        bRecord = false;
         iXBefore = 0;
         iYBefore = 0;
     }

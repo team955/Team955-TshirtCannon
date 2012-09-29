@@ -21,29 +21,30 @@ public class Drive {
     Victor motorRight = new Victor(Var.chanVicDriveRight);
     Victor motorLeft = new Victor(Var.chanVicDriveLeft);
     CButton butInvert = new CButton();
+    
     public void run(Joystick joy)
     {
-		butInvert.run(joy.getRawButton(Var.buttonInvert));
+        butInvert.run(joy.getRawButton(Var.buttonInvert));
 		
         double y = -joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
 		
-		System.out.println("x:" + x + " - y:" + y);
-		
-		if(Var.bShooting != true)
-		{
-			if(Math.abs(y) + Math.abs(x) > 0.1)
-			{
-				motorRight.set(-y+x);
-				motorLeft.set(y+x);
-			}
+        //System.out.println("x:" + x + " - y:" + y);
 
-			else
-			{
-				motorRight.set(0);
-				motorLeft.set(0);
-			}
-		}
+        if(Var.bShooting != true)
+        {
+            if(Math.abs(y) + Math.abs(x) > 0.1)
+            {
+                motorRight.set(-y+x);
+                motorLeft.set(y+x);
+            }
+
+            else
+            {
+                motorRight.set(0);
+                motorLeft.set(0);
+            }
+        }
     } 
     
     public void setSpeed(double motorRightSpeed, double motorLeftSpeed)
