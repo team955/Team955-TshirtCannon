@@ -20,12 +20,9 @@ import edu.wpi.first.wpilibj.*;
 public class Drive {
     Victor motorRight = new Victor(Var.chanVicDriveRight);
     Victor motorLeft = new Victor(Var.chanVicDriveLeft);
-    CButton butInvert = new CButton();
     
     public void run(Joystick joy)
-    {
-        butInvert.run(joy.getRawButton(Var.buttonInvert));
-		
+    {		
         double y = -joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
 		

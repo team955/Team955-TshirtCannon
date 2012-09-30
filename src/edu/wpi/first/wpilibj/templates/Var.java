@@ -34,15 +34,11 @@ public class Var {
     static final int buttonAimUp = 1;
     static final int buttonAimDown = 3;
     static final int buttonChargeShirt = 8;
-	
-	
-    static final int buttonInvert = 12;
-    static final int buttonRecord = 5;
-    static final int buttonReplay = 6;
-    static final int buttonClearList = 7;
+    static final int buttonChrgTmLower = 5;
+    static final int buttonChrgTmHigher = 6;
     
     // Other
-	static boolean bShooting = false;
+    static boolean bShooting = false;
     static final double kickBackSpeed = 1;
     static final double solChargeTime = 3;
     static final double jagurRampSpeed = 0.1;

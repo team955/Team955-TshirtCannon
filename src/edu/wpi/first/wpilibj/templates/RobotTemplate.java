@@ -48,6 +48,5 @@ public class RobotTemplate extends IterativeRobot {
     public void teleopPeriodic() {
 		drive.run(ps3Joy);
 		cannon.run(ps3Joy, drive);
-		//record.run(ps3Joy, cannon, drive);
     }
 }

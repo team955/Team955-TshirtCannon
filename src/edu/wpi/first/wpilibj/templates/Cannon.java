@@ -23,9 +23,13 @@ public class Cannon {
     CButton btShootShirt = new CButton();
     CButton btAimUp = new CButton();
     CButton btAimDown = new CButton(); 
+    CButton btChargeTmLower = new CButton(); 
+    CButton btChargeTmHigher = new CButton(); 
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
     boolean isCharging = false;
+    double iChargeFactor = 4;
+    double dChargeTime = 0;
   
     public void run(Joystick joy, Drive driver)
     {        
@@ -33,7 +37,9 @@ public class Cannon {
         btAimUp.run(joy.getRawButton(Var.buttonAimUp));
         btAimDown.run(joy.getRawButton(Var.buttonAimDown));
         btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
-        
+        btChargeTmLower.run(joy.getRawButton(Var.buttonChrgTmLower));
+        btChargeTmHigher.run(joy.getRawButton(Var.buttonChrgTmHigher));
+                
         
         if(btAimUp.gotPressed())
             solMoveTurret.turnOn();
@@ -48,7 +54,15 @@ public class Cannon {
             tSolChargeTurret.start();
         }
         
-        if(tSolChargeTurret.get() > 4*DriverStation.getInstance().getAnalogIn(1))
+        //*DriverStation.getInstance().getAnalogIn(1);
+       
+        if(btChargeTmLower.gotPressed() && iChargeFactor > 0)
+            iChargeFactor++;
+        
+        if(btChargeTmHigher.gotPressed() && iChargeFactor > 0)
+            iChargeFactor--;
+        
+        if(tSolChargeTurret.get() > iChargeFactor)
         {
             isCharging = false;
             solFeedTurret.turnOff();
@@ -68,13 +82,13 @@ public class Cannon {
         {
             driver.setSpeed(0,0);
 			
-			if(tSolTurretOff.get() > 1)
-			{	
-				Var.bShooting = false;
-				solShootShirt.turnOff();
-				tSolTurretOff.stop();
-				tSolTurretOff.reset();
-			}
-		}
+            if(tSolTurretOff.get() > 1)
+            {	
+                Var.bShooting = false;
+                solShootShirt.turnOff();
+                tSolTurretOff.stop();
+                tSolTurretOff.reset();
+            }
+        }
     }
 }
