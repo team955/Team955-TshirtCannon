@@ -28,9 +28,10 @@ public class Cannon {
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
     boolean isCharging = false;
-    double iChargeFactor = 4;
-    double dChargeTime = 0;
-  
+    int iChargeFactor = 4;
+    String sChargeTmLeft;
+    String sChargeTm;
+
     public void run(Joystick joy, Drive driver)
     {        
         btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
@@ -62,6 +63,13 @@ public class Cannon {
         if(btChargeTmHigher.gotPressed() && iChargeFactor > 0)
             iChargeFactor--;
         
+        sChargeTm = Integer.toString(iChargeFactor);
+        sChargeTmLeft = Double.toString(tSolChargeTurret.get());
+
+        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Charge Factor: " + sChargeTm);
+        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser3, 1, "Charge time Remaining: " + sChargeTmLeft);
+        DriverStationLCD.getInstance().updateLCD();
+		
         if(tSolChargeTurret.get() > iChargeFactor)
         {
             isCharging = false;

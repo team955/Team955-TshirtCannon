@@ -28,14 +28,14 @@ public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive = new Drive();
     Cannon cannon = new Cannon();
-	//CRecord record = new CRecord();
-    
+	
     /**
     * This function is run when the robot is first started up and should be
     * used for any initialization code.
     */
     public void robotInit() {
-        ps3Joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
+    ps3Joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
+
     }
     
     public void autonomous() {
@@ -46,7 +46,7 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called once each time the robot enters operator control. False
      */
     public void teleopPeriodic() {
-		drive.run(ps3Joy);
-		cannon.run(ps3Joy, drive);
+        drive.run(ps3Joy);
+        cannon.run(ps3Joy, drive);
     }
 }

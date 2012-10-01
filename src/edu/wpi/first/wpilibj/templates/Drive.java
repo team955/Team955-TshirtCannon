@@ -25,8 +25,6 @@ public class Drive {
     {		
         double y = -joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
-		
-        //System.out.println("x:" + x + " - y:" + y);
 
         if(Var.bShooting != true)
         {
