@@ -31,6 +31,7 @@ public class Cannon {
     int iChargeFactor = 4;
     String sChargeTmLeft;
     String sChargeTm;
+    CPrintDriver printDriver = new CPrintDriver();
 
     public void run(Joystick joy, Drive driver)
     {        
@@ -58,17 +59,20 @@ public class Cannon {
         //*DriverStation.getInstance().getAnalogIn(1);
        
         if(btChargeTmLower.gotPressed() && iChargeFactor > 0)
-            iChargeFactor++;
-        
-        if(btChargeTmHigher.gotPressed() && iChargeFactor > 0)
             iChargeFactor--;
         
+        if(btChargeTmHigher.gotPressed() && iChargeFactor > 0)
+            iChargeFactor++;
+         
         sChargeTm = Integer.toString(iChargeFactor);
         sChargeTmLeft = Double.toString(tSolChargeTurret.get());
 
-        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Charge Factor: " + sChargeTm);
-        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser3, 1, "Charge time Remaining: " + sChargeTmLeft);
-        DriverStationLCD.getInstance().updateLCD();
+        printDriver.print(2, "Charge Factor: " + sChargeTm);
+        printDriver.print(3, "Charge time Remaining: " + sChargeTmLeft);
+        
+//        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Charge Factor: " + sChargeTm);
+//        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser3, 1, "Charge time Remaining: " + sChargeTmLeft);
+//        DriverStationLCD.getInstance().updateLCD();
 		
         if(tSolChargeTurret.get() > iChargeFactor)
         {
