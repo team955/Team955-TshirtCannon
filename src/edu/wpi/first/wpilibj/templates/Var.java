@@ -36,6 +36,7 @@ public class Var {
     static final int buttonChargeShirt = 8;
     static final int buttonChrgTmLower = 5;
     static final int buttonChrgTmHigher = 6;
+    static final int chanJoyKickBack = 2;
     
     // Other
     static boolean bShooting = false;
