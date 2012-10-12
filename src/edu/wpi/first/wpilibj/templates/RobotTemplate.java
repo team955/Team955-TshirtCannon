@@ -7,8 +7,8 @@
 
 package edu.wpi.first.wpilibj.templates;
 
-
 import edu.wpi.first.wpilibj.*;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,6 +28,8 @@ public class RobotTemplate extends IterativeRobot {
     Joystick ps3Joy = new Joystick(1); 
     Drive drive = new Drive();
     Cannon cannon = new Cannon();
+    CRecord recorder = new CRecord();
+    boolean bRecord = false;
 	
     /**
     * This function is run when the robot is first started up and should be
@@ -48,5 +50,8 @@ public class RobotTemplate extends IterativeRobot {
     public void teleopPeriodic() {
         drive.run(ps3Joy);
         cannon.run(ps3Joy, drive);
+        
+        recorder.run(ps3Joy, cannon, drive);
+        
     }
 }

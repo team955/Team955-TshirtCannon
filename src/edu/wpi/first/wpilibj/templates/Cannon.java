@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package edu.wpi.first.wpilibj.templates;
-import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.*;;
 
 /**
  *
@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.*;
  */
 
 public class Cannon {
+    
     CSolenoids solMoveTurret = new CSolenoids(Var.chanTurretMoveUpTShirt, Var.chanTurretMoveDownTShirt);
     CSolenoids solShootShirt = new CSolenoids(Var.chanSolShootUpTShirt, Var.chanSolShootDownTShirt);
     CSolenoids solFeedTurret = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
@@ -29,8 +30,12 @@ public class Cannon {
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
     boolean isCharging = false;
+    boolean bTurretUp = false;
     int iChargeFactor = 4;
-    String sChargeTmLeft;
+    int iPrint = 0;
+    int iChargeStatusLine = 3;
+    int iChargeFactorLine = 2;
+    int iKickBackLine = 4;
     String sChargeTm;
     CPrintDriver printDriver = new CPrintDriver();
 
@@ -42,61 +47,53 @@ public class Cannon {
         btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
         btChargeTmLower.run(joy.getRawButton(Var.buttonChrgTmLower));
         btChargeTmHigher.run(joy.getRawButton(Var.buttonChrgTmHigher));
-        btEnableKickBack.run(joy.getRawButton(Var.chanJoyKickBack));
+        btEnableKickBack.run(joy.getRawButton(Var.buttonJoyKickBack));
         
         if(btAimUp.gotPressed())
+        {
             solMoveTurret.turnOn();
+            bTurretUp = true;
+        }
 
         else if(btAimDown.gotPressed())
+        {
             solMoveTurret.turnOff();
+            bTurretUp = false;
+        }
         
         if(btChargeTurret.gotPressed() && Var.bShooting == false)   // Charges turret 
         {
+            iPrint = 1;
             isCharging = true;
             solFeedTurret.turnOn();
             tSolChargeTurret.start();
         }
-        
-        //*DriverStation.getInstance().getAnalogIn(1);
        
-        if(btChargeTmLower.gotPressed() && (iChargeFactor - 1) > 0) // Increases charge time
+        if(btChargeTmLower.gotPressed() && (iChargeFactor - 1) > 0) // Decreases charge time
             iChargeFactor--;
         
-        if(btChargeTmHigher.gotPressed())   // Decreases charge time
+        if(btChargeTmHigher.gotPressed())   // Increases charge time
             iChargeFactor++;
-         
-        sChargeTm = Integer.toString(iChargeFactor);
-        sChargeTmLeft = Double.toString(tSolChargeTurret.get());
-
-        printDriver.print(2, "Charge Factor: " + sChargeTm);
-        printDriver.print(3, "Charge time Remaining: " + sChargeTmLeft);
-        
-        if(btEnableKickBack.getSwitch())
-            printDriver.print(4, "Kickback Status: Enabled");
-        
-        else if(!btEnableKickBack.getSwitch())
-            printDriver.print(4, "Kickback Status: Disabled");
-        
-//        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Charge Factor: " + sChargeTm);
-//        DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser3, 1, "Charge time Remaining: " + sChargeTmLeft);
-//        DriverStationLCD.getInstance().updateLCD();
-		
-        if(tSolChargeTurret.get() > iChargeFactor)  // Chargin turret for specified amount of time
+        		
+        if(tSolChargeTurret.get() > iChargeFactor-1)  // Chargin turret for specified amount of time
         {
+            iPrint = 2;
             isCharging = false;
             solFeedTurret.turnOff();
             tSolChargeTurret.stop();
             tSolChargeTurret.reset();
         }
 	
-        if(btShootShirt.gotPressed() && isCharging == false)    // Shoots shirt
+        if(btShootShirt.gotPressed() && isCharging == false && solMoveTurret.getUp())    // Shoots shirt
         {
+            Var.bShooting = true;
+            
             if(btEnableKickBack.getSwitch())    // Creates fake kickback
                 driver.setSpeed(Var.kickBackSpeed, -Var.kickBackSpeed);
             
-            Var.bShooting = true;
             solShootShirt.turnOn();
             tSolTurretOff.start();
+            iPrint = 0;
         }
 		
         if(tSolTurretOff.get() > 0.25 && btEnableKickBack.getSwitch())  // Sets speed back to 0
@@ -109,5 +106,39 @@ public class Cannon {
             tSolTurretOff.stop();
             tSolTurretOff.reset();
         }
+        
+        // Printing to Driver Station 
+        
+        sChargeTm = Integer.toString(iChargeFactor);
+        printDriver.print(iChargeFactorLine, "Charge Factor: " + sChargeTm);
+        
+        if(btEnableKickBack.getSwitch())
+            printDriver.print(iKickBackLine, "Kickback Status: Enabled");
+        
+        else if(!btEnableKickBack.getSwitch())
+            printDriver.print(iKickBackLine, "Kickback Status: Disabled");
+        
+        printChargeStatus(iPrint);
+    }
+    
+    private void printChargeStatus(int i)
+    {
+        if(i == 0)
+            printDriver.print(iChargeStatusLine, "Turret Not Charged");
+        
+        else if(i == 1)
+            printDriver.print(iChargeStatusLine, "Charging Turret");
+        
+        else if(i == 2)
+            printDriver.print(iChargeStatusLine, "Turret Charged!!!");
+    }
+    
+    public void set(boolean bUp)
+    {
+        if(bUp)
+            solMoveTurret.turnOn();
+        
+        else
+            solMoveTurret.turnOff();
     }
 }

@@ -36,12 +36,16 @@ public class Var {
     static final int buttonChargeShirt = 8;
     static final int buttonChrgTmLower = 5;
     static final int buttonChrgTmHigher = 6;
-    static final int chanJoyKickBack = 2;
+    static final int buttonJoyKickBack = 2;
+    static int buttonRecord = 9;
+    static int buttonReplay = 10;
+    static int buttonClearList = 13;    
     
     // Other
+    //static boolean bRecord = false;
+    static boolean bDrive = true;
     static boolean bShooting = false;
     static final double kickBackSpeed = 1;
-    static final double solChargeTime = 3;
     static final double jagurRampSpeed = 0.1;
     static final int chanJoyDrive = 3;
 }

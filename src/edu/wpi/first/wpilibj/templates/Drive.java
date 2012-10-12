@@ -26,7 +26,7 @@ public class Drive {
         double y = -joy.getY() * Math.abs(joy.getY());
         double x = -joy.getX() * Math.abs(joy.getX());
 
-        if(Var.bShooting != true)
+        if(Var.bShooting != true && Var.bDrive)
         {
             if(Math.abs(y) + Math.abs(x) > 0.1)
             {
