@@ -33,6 +33,7 @@ public class CRecord {
     boolean bRepDone = false;
     boolean printReg = false;
     int iPrintWhat = 6;
+    CPrintDriver printToDriverSt = new CPrintDriver();
    
     public void run(Joystick joy, Cannon cannon, Drive driver)
     {
@@ -58,8 +59,8 @@ public class CRecord {
                     bRecStart = true;
                 }
 
-                y = -joy.getY() * Math.abs(joy.getY());
-                x = -joy.getX() * Math.abs(joy.getX());
+                y = joy.getY() * Math.abs(joy.getY());
+                x = joy.getX() * Math.abs(joy.getX());
 
                 joyEmu.add(trRecord.get(), (-y+x), (y+x), cannon.bTurretUp);
             }
@@ -154,21 +155,21 @@ public class CRecord {
     private void printStatus(int i)
     {
         if(i == 1)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Recording");
+            printToDriverSt.print(Var.iCRecordStatus, "Recording");
         
         else if(i == 2)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Replaying");
+            printToDriverSt.print(Var.iCRecordStatus, "Replaying");
         
         else if(i == 3)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Done");
+            printToDriverSt.print(Var.iCRecordStatus, "Done");
         
         else if(i == 4)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Nothing Recorded");
+            printToDriverSt.print(Var.iCRecordStatus, "Nothing Recorded");
         
         else if(i == 5)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Out of memory, can't Record");
+            printToDriverSt.print(Var.iCRecordStatus, "Out of memory, can't Record");
         
         else if(i == 6)
-            DriverStationLCD.getInstance().println(DriverStationLCD.Line.kUser2, 1, "Doing Nothing");
+            printToDriverSt.print(Var.iCRecordStatus, "Doing Nothing");
     }
 }

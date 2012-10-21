@@ -20,6 +20,7 @@ public class Var {
     // PWM
     static final int chanVicDriveRight = 1;
     static final int chanVicDriveLeft = 2;
+	static final int chanVicLight = 3;
 	
     // Solenoids
     static final int chanSolShootUpTShirt = 1;
@@ -38,8 +39,9 @@ public class Var {
     static final int buttonChrgTmHigher = 6;
     static final int buttonJoyKickBack = 2;
     static int buttonRecord = 9;
-    static int buttonReplay = 10;
-    static int buttonClearList = 13;    
+    static int buttonReplay = 12;
+    static int buttonClearList = 10;
+	static final int buttonLight = 11;
     
     // Other
     //static boolean bRecord = false;
@@ -48,4 +50,10 @@ public class Var {
     static final double kickBackSpeed = 1;
     static final double jagurRampSpeed = 0.1;
     static final int chanJoyDrive = 3;
+    
+    // Printing to Driverstation lines, 2-6 are available only
+    static final int iChargeFactorLine = 2;
+    static final int iChargeStatusLine = 3;
+    static final int iKickBackLine = 4;
+    static final int iCRecordStatus = 5;
 }

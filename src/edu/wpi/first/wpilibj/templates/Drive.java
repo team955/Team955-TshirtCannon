@@ -23,8 +23,8 @@ public class Drive {
     
     public void run(Joystick joy)
     {		
-        double y = -joy.getY() * Math.abs(joy.getY());
-        double x = -joy.getX() * Math.abs(joy.getX());
+        double y = joy.getY() * Math.abs(joy.getY());
+        double x = joy.getX() * Math.abs(joy.getX());
 
         if(Var.bShooting != true && Var.bDrive)
         {

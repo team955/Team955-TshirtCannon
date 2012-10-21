@@ -29,7 +29,7 @@ public class RobotTemplate extends IterativeRobot {
     Drive drive = new Drive();
     Cannon cannon = new Cannon();
     CRecord recorder = new CRecord();
-    boolean bRecord = false;
+    CUnderGlow underGlow = new CUnderGlow();
 	
     /**
     * This function is run when the robot is first started up and should be
@@ -52,6 +52,6 @@ public class RobotTemplate extends IterativeRobot {
         cannon.run(ps3Joy, drive);
         
         recorder.run(ps3Joy, cannon, drive);
-        
+        underGlow.run(ps3Joy);
     }
 }

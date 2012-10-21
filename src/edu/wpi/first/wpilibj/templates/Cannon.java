@@ -22,8 +22,7 @@ public class Cannon {
     CSolenoids solFeedTurret = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt);
     CButton btChargeTurret = new CButton();
     CButton btShootShirt = new CButton();
-    CButton btAimUp = new CButton();
-    CButton btAimDown = new CButton(); 
+    CButton btAimTur = new CButton();
     CButton btChargeTmLower = new CButton(); 
     CButton btChargeTmHigher = new CButton(); 
     CButton btEnableKickBack = new CButton();
@@ -33,32 +32,22 @@ public class Cannon {
     boolean bTurretUp = false;
     int iChargeFactor = 4;
     int iPrint = 0;
-    int iChargeStatusLine = 3;
-    int iChargeFactorLine = 2;
-    int iKickBackLine = 4;
     String sChargeTm;
     CPrintDriver printDriver = new CPrintDriver();
 
     public void run(Joystick joy, Drive driver)
     {        
         btShootShirt.run(joy.getRawButton(Var.buttonShootShirt));
-        btAimUp.run(joy.getRawButton(Var.buttonAimUp));
-        btAimDown.run(joy.getRawButton(Var.buttonAimDown));
+        btAimTur.run(joy.getRawButton(Var.buttonAimDown));
         btChargeTurret.run(joy.getRawButton(Var.buttonChargeShirt));
         btChargeTmLower.run(joy.getRawButton(Var.buttonChrgTmLower));
         btChargeTmHigher.run(joy.getRawButton(Var.buttonChrgTmHigher));
         btEnableKickBack.run(joy.getRawButton(Var.buttonJoyKickBack));
         
-        if(btAimUp.gotPressed())
+        if(btAimTur.gotPressed())
         {
-            solMoveTurret.turnOn();
-            bTurretUp = true;
-        }
-
-        else if(btAimDown.gotPressed())
-        {
-            solMoveTurret.turnOff();
-            bTurretUp = false;
+            bTurretUp = !bTurretUp;
+            solMoveTurret.set(bTurretUp);
         }
         
         if(btChargeTurret.gotPressed() && Var.bShooting == false)   // Charges turret 
@@ -110,13 +99,13 @@ public class Cannon {
         // Printing to Driver Station 
         
         sChargeTm = Integer.toString(iChargeFactor);
-        printDriver.print(iChargeFactorLine, "Charge Factor: " + sChargeTm);
+        printDriver.print(Var.iChargeFactorLine, "Charge Factor: " + sChargeTm);
         
         if(btEnableKickBack.getSwitch())
-            printDriver.print(iKickBackLine, "Kickback Status: Enabled");
+            printDriver.print(Var.iKickBackLine, "Kickback: Enabled");
         
         else if(!btEnableKickBack.getSwitch())
-            printDriver.print(iKickBackLine, "Kickback Status: Disabled");
+            printDriver.print(Var.iKickBackLine, "Kickback: Disabled");
         
         printChargeStatus(iPrint);
     }
@@ -124,13 +113,13 @@ public class Cannon {
     private void printChargeStatus(int i)
     {
         if(i == 0)
-            printDriver.print(iChargeStatusLine, "Turret Not Charged");
+            printDriver.print(Var.iChargeStatusLine, "Turret Not Charged");
         
         else if(i == 1)
-            printDriver.print(iChargeStatusLine, "Charging Turret");
+            printDriver.print(Var.iChargeStatusLine, "Charging Turret");
         
         else if(i == 2)
-            printDriver.print(iChargeStatusLine, "Turret Charged!!!");
+            printDriver.print(Var.iChargeStatusLine, "Turret Charged!!!");
     }
     
     public void set(boolean bUp)
