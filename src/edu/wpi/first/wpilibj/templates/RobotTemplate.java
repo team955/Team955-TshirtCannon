@@ -55,3 +55,10 @@ public class RobotTemplate extends IterativeRobot {
     underGlow.run(ps3Joy);
     }
 }
+/*
+ * Some prefixes use in this prject
+ * mtSomething = motor
+ * iSomething = int
+ * sSomething = string 
+ * bSomething = boolean
+ */

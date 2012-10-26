@@ -28,7 +28,7 @@ public class Cannon {
     CButton btEnableKickBack = new CButton();
     Timer tSolTurretOff = new Timer();
     Timer tSolChargeTurret = new Timer();
-    boolean isCharging = false;
+    boolean bIsCharging = false;
     boolean bTurretUp = false;
     int iChargeFactor = 4;
     int iPrint = 0;
@@ -53,7 +53,7 @@ public class Cannon {
         if(btChargeTurret.gotPressed() && Var.bShooting == false)   // Charges turret 
         {
             iPrint = 1;
-            isCharging = true;
+            bIsCharging = true;
             solFeedTurret.turnOn();
             tSolChargeTurret.start();
         }
@@ -67,13 +67,13 @@ public class Cannon {
         if(tSolChargeTurret.get() > iChargeFactor-1)  // Chargin turret for specified amount of time
         {
             iPrint = 2;
-            isCharging = false;
+            bIsCharging = false;
             solFeedTurret.turnOff();
             tSolChargeTurret.stop();
             tSolChargeTurret.reset();
         }
 	
-        if(btShootShirt.gotPressed() && isCharging == false && solMoveTurret.getUp())    // Shoots shirt
+        if(btShootShirt.gotPressed() && bIsCharging == false && solMoveTurret.getUp())    // Shoots shirt
         {
             Var.bShooting = true;
             
