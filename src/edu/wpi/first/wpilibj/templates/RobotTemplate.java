@@ -48,10 +48,10 @@ public class RobotTemplate extends IterativeRobot {
      * This function is called once each time the robot enters operator control. False
      */
     public void teleopPeriodic() {
-        drive.run(ps3Joy);
-        cannon.run(ps3Joy, drive);
-        
-        recorder.run(ps3Joy, cannon, drive);
-        underGlow.run(ps3Joy);
+    drive.run(ps3Joy);
+    cannon.run(ps3Joy, drive);
+
+    recorder.run(ps3Joy, cannon, drive);
+    underGlow.run(ps3Joy);
     }
 }

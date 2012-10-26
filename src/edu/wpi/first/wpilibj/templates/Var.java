@@ -41,7 +41,7 @@ public class Var {
     static int buttonRecord = 9;
     static int buttonReplay = 12;
     static int buttonClearList = 10;
-	static final int buttonLight = 11;
+    static final int buttonLight = 11;
     
     // Other
     //static boolean bRecord = false;
