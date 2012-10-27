@@ -21,25 +21,27 @@ public class CSolenoids
 
     private Solenoid solUp;
     private Solenoid solDown;
+    private boolean bSetDown;
     
-    public CSolenoids(int solDownChannel, int solUpChannel)
+    public CSolenoids(int solDownChannel, int solUpChannel, boolean bDown)
     {
+        bSetDown = bDown;
         solUp = new Solenoid(solUpChannel);
         solDown = new Solenoid(solDownChannel);
-        solUp.set(false);
-        solDown.set(true);
+        solUp.set(!bSetDown);
+        solDown.set(bSetDown);
     }
     
     public void turnOn()
     {
-        solUp.set(true);
-        solDown.set(false);
-	}
+        solUp.set(bSetDown);
+        solDown.set(!bSetDown);
+    }
     
     public void turnOff()
     {
-        solUp.set(false);
-        solDown.set(true); 
+        solUp.set(!bSetDown);
+        solDown.set(bSetDown); 
     }
     
     public void set(boolean bVal)
@@ -58,11 +60,11 @@ public class CSolenoids
     
     public boolean getUp()
     {
-            return solUp.get();
+        return solUp.get();
     }
 
     public boolean getDown()
     {
-            return solDown.get();
+        return solDown.get();
     }
 }
