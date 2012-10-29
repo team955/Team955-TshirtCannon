@@ -25,10 +25,19 @@ public class CUnderGlow {
                 bLight = !bLight;
 
                 if(bLight)
-                        mtGlow.set(1);
+                    mtGlow.set(1);
 
                 else
-                        mtGlow.set(0);
+                    mtGlow.set(0);
             }	
 	}
+        
+        public void set(boolean bStatus)
+        {
+            if(bStatus)
+                mtGlow.set(1);
+
+            else
+                mtGlow.set(0);
+        }
 }

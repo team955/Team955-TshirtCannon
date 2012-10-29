@@ -36,6 +36,7 @@ public class RobotTemplate extends IterativeRobot {
     */
     public void robotInit() {
     ps3Joy.setAxisChannel(Joystick.AxisType.kX, Var.chanJoyDrive);
+    underGlow.set(true);
 
     }
     
@@ -50,8 +51,9 @@ public class RobotTemplate extends IterativeRobot {
         drive.run(ps3Joy);
         cannon.run(ps3Joy, drive);
 
-        recorder.run(ps3Joy, cannon, drive);
         underGlow.run(ps3Joy);
+        
+        recorder.run(ps3Joy, cannon, drive, underGlow);
     }
 }
 /*

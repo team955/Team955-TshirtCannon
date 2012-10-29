@@ -35,7 +35,7 @@ public class CRecord {
     int iPrintWhat = 6;
     CPrintDriver printToDriverSt = new CPrintDriver();
    
-    public void run(Joystick joy, Cannon cannon, Drive driver)
+    public void run(Joystick joy, Cannon cannon, Drive driver, CUnderGlow underGlow)
     {
         btRecord.run(joy.getRawButton(Var.buttonRecord));
         btReplay.run(joy.getRawButton(Var.buttonReplay));
@@ -62,7 +62,7 @@ public class CRecord {
                 y = joy.getY() * Math.abs(joy.getY());
                 x = joy.getX() * Math.abs(joy.getX());
 
-                joyEmu.add(trRecord.get(), (-y+x), (y+x), cannon.bTurretUp);
+                joyEmu.add(trRecord.get(), (-y+x), (y+x), cannon.bTurretUp, underGlow.bLight);
             }
             
             catch(OutOfMemoryError E)
@@ -91,6 +91,7 @@ public class CRecord {
                     iPrintWhat = 2;
                     driver.setSpeed(joyEmu.getMtRight(-1), joyEmu.getMtLeft(-1));
                     cannon.set(joyEmu.getTurret(-1));
+                    underGlow.set(joyEmu.getLight(-1));
 
                     if(trReplay.get() > joyEmu.getTmr(-1))
                         joyEmu.getNext();
