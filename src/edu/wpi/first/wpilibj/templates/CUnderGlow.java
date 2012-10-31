@@ -12,32 +12,37 @@ import edu.wpi.first.wpilibj.*;
  */
 public class CUnderGlow {
 	
-	Victor mtGlow = new Victor(Var.chanVicLight);
-	CButton btLight = new CButton();
-	boolean bLight = false;
-	
-	public void run(Joystick joy)
-	{
-            btLight.run(joy.getRawButton(Var.buttonLight));
+    private Victor mtGlow = new Victor(Var.chanVicLight);
+    private CButton btLight = new CButton();
+    private boolean bLight = false;
 
-            if(btLight.gotPressed())
-            {
-                bLight = !bLight;
+    public void run(Joystick joy)
+    {
+        btLight.run(joy.getRawButton(Var.buttonLight));
 
-                if(bLight)
-                    mtGlow.set(1);
-
-                else
-                    mtGlow.set(0);
-            }	
-	}
-        
-        public void set(boolean bStatus)
+        if(btLight.gotPressed())
         {
-            if(bStatus)
+            bLight = !bLight;
+
+            if(bLight)
                 mtGlow.set(1);
 
             else
                 mtGlow.set(0);
-        }
+        }	
+    }
+
+    public boolean getLightStatus()
+    {
+        return bLight;
+    }
+    
+    public void set(boolean bStatus)
+    {
+        if(bStatus)
+            mtGlow.set(1);
+
+        else
+            mtGlow.set(0);
+    }
 }

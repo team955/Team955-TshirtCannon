@@ -13,8 +13,8 @@ class CJoystickMimic{
     {
         boolean bTurret;
         boolean bLight;
-        double dX;
-        double dY;
+        double dMtRight;
+        double dMtLeft;
         double dTmr;
         link next;
         link prev;
@@ -35,13 +35,13 @@ class CJoystickMimic{
         size  = 0;
     }
     
-    public void add(double dTimer, double dXVal, double dYVal, boolean bTurretStatus, boolean bLightStatus)
+    public void add(double dTimer, double dMtLeftSpeed, double dMtRightSpeed, boolean bTurretStatus, boolean bLightStatus)
     {
         size++;
         link tempLink = new link();
         tempLink.dTmr = dTimer;
-        tempLink.dX = dXVal;
-        tempLink.dY = dYVal;
+        tempLink.dMtRight = dMtRightSpeed;
+        tempLink.dMtLeft = dMtLeftSpeed;
         tempLink.bTurret = bTurretStatus;
         tempLink.bLight = bLightStatus;
         
@@ -64,7 +64,7 @@ class CJoystickMimic{
     {
         if(index == -1)
         {
-            return curLink.dX;
+            return curLink.dMtRight;
         }
         
         else 
@@ -72,7 +72,7 @@ class CJoystickMimic{
             link tempLink;
         
             tempLink = getObject(index);
-            return tempLink.dX; 
+            return tempLink.dMtRight; 
         }
     }
     
@@ -80,7 +80,7 @@ class CJoystickMimic{
     {
         if(index == -1)
         {
-            return curLink.dY;
+            return curLink.dMtLeft;
         }
         
         else 
@@ -88,7 +88,7 @@ class CJoystickMimic{
             link tempLink;
         
             tempLink = getObject(index);
-            return tempLink.dY; 
+            return tempLink.dMtLeft; 
         }
     }
     

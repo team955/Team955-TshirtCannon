@@ -61,8 +61,8 @@ public class CRecord {
 
                 y = joy.getY() * Math.abs(joy.getY());
                 x = joy.getX() * Math.abs(joy.getX());
-
-                joyEmu.add(trRecord.get(), (-y+x), (y+x), cannon.bTurretUp, underGlow.bLight);
+                
+                joyEmu.add(trRecord.get(), driver.getMtLeftSpeed(), driver.getMtRightSpeed(), cannon.getTurretUpStatus(), underGlow.getLightStatus());
             }
             
             catch(OutOfMemoryError E)
@@ -89,7 +89,7 @@ public class CRecord {
                 if(trReplay.get() <= trRecord.get() && bRepDone == false)
                 {
                     iPrintWhat = 2;
-                    driver.setSpeed(joyEmu.getMtRight(-1), joyEmu.getMtLeft(-1));
+                    driver.setSpeed(joyEmu.getMtLeft(-1), joyEmu.getMtRight(-1));
                     cannon.set(joyEmu.getTurret(-1));
                     underGlow.set(joyEmu.getLight(-1));
 

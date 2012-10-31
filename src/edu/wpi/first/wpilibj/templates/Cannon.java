@@ -17,23 +17,23 @@ import edu.wpi.first.wpilibj.*;;
 
 public class Cannon {
     
-    CSolenoids solMoveTurret = new CSolenoids(Var.chanTurretMoveUpTShirt, Var.chanTurretMoveDownTShirt, true);
-    CSolenoids solShootShirt = new CSolenoids(Var.chanSolShootUpTShirt, Var.chanSolShootDownTShirt, true);
-    CSolenoids solChargeTurret = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt, false);
-    CButton btChargeTurret = new CButton();
-    CButton btShootShirt = new CButton();
-    CButton btAimTur = new CButton();
-    CButton btChargeTmLower = new CButton(); 
-    CButton btChargeTmHigher = new CButton(); 
-    CButton btEnableKickBack = new CButton();
-    Timer tSolTurretOff = new Timer();
-    Timer tSolChargeTurret = new Timer();
-    boolean bIsCharging = false;
-    boolean bTurretUp = false;
-    int iChargeFactor = 4;
-    int iPrint = 0;
-    String sChargeTm;
-    CPrintDriver printDriver = new CPrintDriver();
+    private CSolenoids solMoveTurret = new CSolenoids(Var.chanTurretMoveUpTShirt, Var.chanTurretMoveDownTShirt, true);
+    private CSolenoids solShootShirt = new CSolenoids(Var.chanSolShootUpTShirt, Var.chanSolShootDownTShirt, true);
+    private CSolenoids solChargeTurret = new CSolenoids(Var.chanSolUpChargeShirt, Var.chanSolDownChargeShirt, false);
+    private CButton btChargeTurret = new CButton();
+    private CButton btShootShirt = new CButton();
+    private CButton btAimTur = new CButton();
+    private CButton btChargeTmLower = new CButton(); 
+    private CButton btChargeTmHigher = new CButton(); 
+    private CButton btEnableKickBack = new CButton();
+    private Timer tSolTurretOff = new Timer();
+    private Timer tSolChargeTurret = new Timer();
+    private boolean bIsCharging = false;
+    private boolean bTurretUp = false;
+    private int iChargeFactor = 4;
+    private int iPrint = 0;
+    private String sChargeTm;
+    private CPrintDriver printDriver = new CPrintDriver();
 
     public void run(Joystick joy, Drive driver)
     {        
@@ -129,5 +129,10 @@ public class Cannon {
         
         else
             solMoveTurret.turnOff();
+    }
+    
+    public boolean getTurretUpStatus()
+    {
+        return bTurretUp;
     }
 }

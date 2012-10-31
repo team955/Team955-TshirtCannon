@@ -18,20 +18,27 @@ import edu.wpi.first.wpilibj.*;
  */
          
 public class Drive {
-    Victor motorRight = new Victor(Var.chanVicDriveRight);
-    Victor motorLeft = new Victor(Var.chanVicDriveLeft);
+    private Victor motorRight = new Victor(Var.chanVicDriveRight);
+    private Victor motorLeft = new Victor(Var.chanVicDriveLeft);
+    private double mtRightSpeed = 0;
+    private double mtLeftSpeed = 0;
+    private double x = 0;
+    private double y = 0;
     
     public void run(Joystick joy)
     {		
-        double y = joy.getY() * Math.abs(joy.getY());
-        double x = joy.getX() * Math.abs(joy.getX());
-
+        y = joy.getY() * Math.abs(joy.getY());
+        x = joy.getX() * Math.abs(joy.getX());
+        
+        mtRightSpeed = -y+x;
+        mtLeftSpeed = y+x;
+        
         if(Var.bShooting != true && Var.bDrive)
         {
-            if(Math.abs(y) + Math.abs(x) > 0.1)
+            if(Math.abs(mtLeftSpeed) + Math.abs(mtRightSpeed) > 0.1)
             {
-                motorRight.set(-y+x);
-                motorLeft.set(y+x);
+                motorRight.set(mtRightSpeed);
+                motorLeft.set(mtLeftSpeed);
             }
 
             else
@@ -42,7 +49,17 @@ public class Drive {
         }
     } 
     
-    public void setSpeed(double motorRightSpeed, double motorLeftSpeed)
+    public double getMtRightSpeed()
+    {
+        return mtRightSpeed;
+    }
+    
+    public double getMtLeftSpeed()
+    {
+        return mtLeftSpeed;
+    }
+    
+    public void setSpeed(double motorLeftSpeed, double motorRightSpeed)
     {
         motorRight.set(motorRightSpeed);
         motorLeft.set(motorLeftSpeed);

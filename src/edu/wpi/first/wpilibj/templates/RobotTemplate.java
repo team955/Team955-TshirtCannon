@@ -51,8 +51,8 @@ public class RobotTemplate extends IterativeRobot {
         drive.run(ps3Joy);
         cannon.run(ps3Joy, drive);
 
-        underGlow.run(ps3Joy);
         
+        underGlow.run(ps3Joy);
         recorder.run(ps3Joy, cannon, drive, underGlow);
     }
 }
